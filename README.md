@@ -13,9 +13,35 @@ Edit Page
 Create Page
 ![alt text](./wireframes/Create-Recipe.png)
 
+---
+
 ## Entity Relationship Diagram
 
 ![alt text](./wireframes/ERD.png)
+
+## Recipe Model
+
+- name: String
+- description: String
+- time: Number
+- steps: \[String\]
+- ingredients: \[ingredientSchema\]
+- user: Schema.Types.ObjectId, ref: User
+
+## Ingredients Model
+
+- name: String
+- group: String
+- qty: Number
+- unit: String
+
+## User Model
+
+- userName: String, unique: true
+- password: String
+- token: String
+
+---
 
 ## MVP
 
