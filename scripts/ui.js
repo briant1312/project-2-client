@@ -94,7 +94,7 @@ export const createEditForm = () => {
         div.innerHTML = 
         `
         <label for="update-form-qty">qty</label>
-        <input type="number" id="update-form-qty" value="${ingredient.childNodes[0].innerText}">
+        <input type="number" step="0.1" id="update-form-qty" value="${ingredient.childNodes[0].innerText}">
         <label for="update-form-unit">unit</label>
         <input type="text" id="update-form-unit" value="${ingredient.childNodes[2].innerText}">
         <label for="update-form-name">name</label>
