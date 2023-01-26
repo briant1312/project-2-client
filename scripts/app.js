@@ -92,5 +92,64 @@ const createEditButtonEventListener = () => {
     const editButton = document.querySelector('.edit-recipe')
     editButton.addEventListener('click', () => {
         createEditForm()
+        createDeleteIngredientEventListener()
+        createDeleteStepEventListener()
+        createAddIngredientEventListener()
+        createAddStepEventListener()
+    })
+}
+
+const createDeleteIngredientEventListener = () => {
+    const deleteButtons = document.querySelectorAll('.update-form-delete-ingredient')
+    for(let button of deleteButtons) {
+        button.addEventListener('click', (e) => {
+            e.preventDefault()
+            button.parentElement.remove()
+        })
+    }
+}
+
+const createDeleteStepEventListener = () => {
+    const deleteButtons = document.querySelectorAll('.update-form-delete-step')
+    for(let button of deleteButtons) {
+        button.addEventListener('click', (e) => {
+            e.preventDefault()
+            button.parentElement.remove()
+        })
+    }
+}
+
+const createAddIngredientEventListener = () => {
+    const addIngredientButton = document.querySelector('.update-form-add-ingredient')
+    addIngredientButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        const div = document.createElement('div')
+        div.innerHTML = 
+        `
+        <label for="update-form-qty">qty</label>
+        <input type="number" step="0.1" id="update-form-qty">
+        <label for="update-form-unit">unit</label>
+        <input type="text" id="update-form-unit">
+        <label for="update-form-name">name</label>
+        <input type="text" id="update-form-name">
+        <button class="update-form-delete-ingredient">Remove</button>
+        `
+        document.querySelector('.update-form-ingredients').appendChild(div)
+        createDeleteIngredientEventListener()
+    })
+}
+
+const createAddStepEventListener = () => {
+    const addStepButton = document.querySelector('.update-form-add-step')
+    addStepButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        const div = document.createElement('div')
+        div.innerHTML = 
+        `
+        <input type="text">
+        <button class="update-form-delete-step">Remove</button>
+        `
+        document.querySelector('.update-form-steps').appendChild(div)
+        createDeleteStepEventListener()
     })
 }

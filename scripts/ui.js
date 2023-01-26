@@ -85,8 +85,12 @@ export const createEditForm = () => {
     <input id="description" type="text" value="${description.innerText}">
     <label for="time" >Time(in minutes):</label>
     <input id="time" type="Number" value="${time.innerText}">
-    <div class="update-form-ingredients"><h3>Ingredients</h3></div>
-    <div class="update-form-steps"><h3>Steps</h3></div>
+    <h3>Ingredients</h3>
+    <button class="update-form-add-ingredient">Add Ingredient</button>
+    <div class="update-form-ingredients"></div>
+    <h3>Steps</h3>
+    <button class="update-form-add-step">Add Step</button>
+    <div class="update-form-steps"></div>
     `
 
     ingredients.forEach(ingredient => {
@@ -99,6 +103,7 @@ export const createEditForm = () => {
         <input type="text" id="update-form-unit" value="${ingredient.childNodes[2].innerText}">
         <label for="update-form-name">name</label>
         <input type="text" id="update-form-name" value="${ingredient.childNodes[4].innerText}">
+        <button class="update-form-delete-ingredient">Remove</button>
         `
         document.querySelector('.update-form-ingredients').appendChild(div)
     })
@@ -108,6 +113,7 @@ export const createEditForm = () => {
         div.innerHTML = 
         `
         <input type="text" value="${step.innerText}">
+        <button class="update-form-delete-step">Remove</button>
         `
         document.querySelector('.update-form-steps').appendChild(div)
     })
