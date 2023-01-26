@@ -3,6 +3,7 @@ const logInForm = document.querySelector('#log-in')
 const messageContainer = document.querySelector('.message-container')
 const showContainer = document.querySelector('.show-container')
 const updateRecipeForm = document.querySelector('#update-recipe')
+const addNewRecipeForm = document.querySelector('#add-recipe')
 
 export const onLoginSuccess = (responseData) => {
     messageContainer.innerHTML = ''
@@ -121,4 +122,44 @@ export const createEditForm = (id) => {
         document.querySelector('.update-form-steps').appendChild(div)
     })
     showContainer.classList.add('hidden')
+}
+
+export const craeteAddRecipeForm = () => {
+    addNewRecipeForm.innerHTML = 
+    `
+    <label>Name:</label>
+    <input class="add-recipe-form-name" type="text">
+    <label>Description</label>
+    <input class="add-recipe-form-description" type="text">
+    <label>Time(in minutes):</label>
+    <input class="add-recipe-form-time" type="number">
+    <h3>Ingredients</h3>
+    <button class="add-recipe-form-add-ingredient">Add Ingredient</button>
+    <div class="add-recipe-form-ingredients"></div>
+    <h3>Steps</h3>
+    <button class="add-recipe-form-add-step">Add Step</button>
+    <div class="add-recipe-form-steps"></div>
+    <button class="add-recipe-form-submit">Submit</button>
+    `
+
+    const ingredientDiv = document.createElement('div')
+    ingredientDiv.innerHTML = 
+        `
+        <label>qty</label>
+        <input type="number" step="0.1">
+        <label>unit</label>
+        <input type="text">
+        <label>name</label>
+        <input type="text">
+        <button class="add-recipe-form-delete-ingredient">Remove</button>
+        `
+    document.querySelector('.add-recipe-form-ingredients').appendChild(ingredientDiv)
+
+    const stepDiv = document.createElement('div')
+    stepDiv.innerHTML = 
+    `
+    <input type="text">
+    <button class="add-recipe-form-delete-step">Remove</button>
+    `
+    document.querySelector('.add-recipe-form-steps').appendChild(stepDiv)
 }

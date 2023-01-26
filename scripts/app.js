@@ -14,7 +14,8 @@ import {
     onIndexSuccess,
     onCreateAccountSuccess,
     onShowSuccess,
-    createEditForm
+    createEditForm,
+    craeteAddRecipeForm
 } from './ui.js'
 
 // window.localStorage.clear()
@@ -22,7 +23,11 @@ import {
 const signUpButton = document.querySelector('#sign-up')
 const signInButton = document.querySelector('#sign-in')
 const indexContainer = document.querySelector('.index-container')
+const showContainer = document.querySelector('.show-container')
 const updateRecipeForm = document.querySelector('#update-recipe')
+const homeButton = document.querySelector('.home-button')
+const addNewRecipe = document.querySelector('.add-new-recipe')
+const messageContainer = document.querySelector('.message-container')
 
 
 signUpButton.addEventListener('click', (e) => {
@@ -94,16 +99,16 @@ const createEditButtonEventListener = (id) => {
     editButton.setAttribute('data-id', id)
     editButton.addEventListener('click', () => {
         createEditForm(editButton.getAttribute('data-id'))
-        createDeleteIngredientEventListener()
-        createDeleteStepEventListener()
-        createAddIngredientEventListener()
-        createAddStepEventListener()
-        createSubmitFormEventListener()
+        createDeleteIngredientEventListener('update')
+        createDeleteStepEventListener('update')
+        createAddIngredientEventListener('update')
+        createAddStepEventListener('update')
+        createUpdateFormEventListener()
     })
 }
 
-const createDeleteIngredientEventListener = () => {
-    const deleteButtons = document.querySelectorAll('.update-form-delete-ingredient')
+const createDeleteIngredientEventListener = (formBaseName) => {
+    const deleteButtons = document.querySelectorAll(`.${formBaseName}-form-delete-ingredient`)
     for(let button of deleteButtons) {
         button.addEventListener('click', (e) => {
             e.preventDefault()
@@ -112,8 +117,8 @@ const createDeleteIngredientEventListener = () => {
     }
 }
 
-const createDeleteStepEventListener = () => {
-    const deleteButtons = document.querySelectorAll('.update-form-delete-step')
+const createDeleteStepEventListener = (formBaseName) => {
+    const deleteButtons = document.querySelectorAll(`.${formBaseName}-form-delete-step`)
     for(let button of deleteButtons) {
         button.addEventListener('click', (e) => {
             e.preventDefault()
@@ -122,42 +127,42 @@ const createDeleteStepEventListener = () => {
     }
 }
 
-const createAddIngredientEventListener = () => {
-    const addIngredientButton = document.querySelector('.update-form-add-ingredient')
+const createAddIngredientEventListener = (formBaseName) => {
+    const addIngredientButton = document.querySelector(`.${formBaseName}-form-add-ingredient`)
     addIngredientButton.addEventListener('click', (e) => {
         e.preventDefault()
         const div = document.createElement('div')
         div.innerHTML = 
         `
-        <label for="update-form-qty">qty</label>
-        <input type="number" step="0.1" id="update-form-qty">
-        <label for="update-form-unit">unit</label>
-        <input type="text" id="update-form-unit">
-        <label for="update-form-name">name</label>
-        <input type="text" id="update-form-name">
-        <button class="update-form-delete-ingredient">Remove</button>
+        <label for="${formBaseName}-form-qty">qty</label>
+        <input type="number" step="0.1" id="${formBaseName}-form-qty">
+        <label for="${formBaseName}-form-unit">unit</label>
+        <input type="text" id="${formBaseName}-form-unit">
+        <label for="${formBaseName}-form-name">name</label>
+        <input type="text" id="${formBaseName}-form-name">
+        <button class="${formBaseName}-form-delete-ingredient">Remove</button>
         `
-        document.querySelector('.update-form-ingredients').appendChild(div)
-        createDeleteIngredientEventListener()
+        document.querySelector(`.${formBaseName}-form-ingredients`).appendChild(div)
+        createDeleteIngredientEventListener(formBaseName)
     })
 }
 
-const createAddStepEventListener = () => {
-    const addStepButton = document.querySelector('.update-form-add-step')
+const createAddStepEventListener = (formBaseName) => {
+    const addStepButton = document.querySelector(`.${formBaseName}-form-add-step`)
     addStepButton.addEventListener('click', (e) => {
         e.preventDefault()
         const div = document.createElement('div')
         div.innerHTML = 
         `
         <input type="text">
-        <button class="update-form-delete-step">Remove</button>
+        <button class="${formBaseName}-form-delete-step">Remove</button>
         `
-        document.querySelector('.update-form-steps').appendChild(div)
-        createDeleteStepEventListener()
+        document.querySelector(`.${formBaseName}-form-steps`).appendChild(div)
+        createDeleteStepEventListener(formBaseName)
     })
 }
 
-const createSubmitFormEventListener = () => {
+const createUpdateFormEventListener = () => {
     const submitButton = document.querySelector('.update-form-submit')
     submitButton.addEventListener('click', (e) => {
         e.preventDefault()
@@ -197,4 +202,20 @@ const createSubmitFormEventListener = () => {
             .then(() => createIndexEventListeners())
             .catch(console.error)
     })
+}
+
+addNewRecipe.addEventListener('click', () => {
+    clearContent()
+    craeteAddRecipeForm()
+    createDeleteIngredientEventListener('add-recipe')
+    createDeleteStepEventListener('add-recipe')
+    createAddIngredientEventListener('add-recipe')
+    createAddStepEventListener('add-recipe')
+})
+
+const clearContent = () => {
+    messageContainer.innerHTML = ''
+    indexContainer.innerHTML = ''
+    showContainer.innerHTML = ''
+    updateRecipeForm.innerHTML = ''
 }
