@@ -82,20 +82,22 @@ const createIndexEventListeners = () => {
             showRecipe(id)
                 .then(res => res.json())
                 .then(recipe => onShowSuccess(recipe.recipe))
-                .then(() => createEditButtonEventListener())
+                .then(() => createEditButtonEventListener(id))
                 .catch(console.error)
         })
     })
 }
 
-const createEditButtonEventListener = () => {
+const createEditButtonEventListener = (id) => {
     const editButton = document.querySelector('.edit-recipe')
+    editButton.setAttribute('data-id', id)
     editButton.addEventListener('click', () => {
-        createEditForm()
+        createEditForm(editButton.getAttribute('data-id'))
         createDeleteIngredientEventListener()
         createDeleteStepEventListener()
         createAddIngredientEventListener()
         createAddStepEventListener()
+        createSubmitFormEventListener()
     })
 }
 
@@ -151,5 +153,41 @@ const createAddStepEventListener = () => {
         `
         document.querySelector('.update-form-steps').appendChild(div)
         createDeleteStepEventListener()
+    })
+}
+
+const createSubmitFormEventListener = () => {
+    const submitButton = document.querySelector('.update-form-submit')
+    submitButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        const name = document.querySelector('.recipe-name').innerText
+        const description = document.querySelector('.description').innerText
+        const time = document.querySelector('.recipe-time').innerText
+        const stepsArray = []
+        const ingredientsArray = []
+        const steps = document.querySelectorAll('.update-form-steps input')
+        for(let step of steps) {
+            stepsArray.push(step.value)
+        }
+        const ingredients = document.querySelectorAll('.update-form-ingredients input')
+        for(let i = 0; i < ingredients.length; i += 3) {
+            const ingredient = {
+                qty: ingredients[i].value,
+                unit: ingredients[i+1].value,
+                name: ingredients[i+2].value
+            }
+            ingredientsArray.push(ingredient)
+        }
+        
+        const updatedRecipe = {
+            recipe: {
+                name: name,
+                description: description,
+                time: time,
+                steps: stepsArray,
+                ingredients: ingredientsArray
+            }
+        }
+        console.log(updatedRecipe)
     })
 }

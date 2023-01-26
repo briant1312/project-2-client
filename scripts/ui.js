@@ -49,7 +49,7 @@ export const onShowSuccess = (recipe) => {
     })
     div.innerHTML = 
     `
-    <h2>${recipe.name}</h2>
+    <h2 class="recipe-name">${recipe.name}</h2>
     <p class="description">${recipe.description}</p>
     <p>Time: <span class='recipe-time'>${recipe.time}</span> Minutes</p>
     `
@@ -70,7 +70,7 @@ export const onShowSuccess = (recipe) => {
     showContainer.appendChild(editButton)
 }
 
-export const createEditForm = () => {
+export const createEditForm = (id) => {
     const name = document.querySelector('.show-container h2')
     const description = document.querySelector('.description')
     const time = document.querySelector('.recipe-time')
@@ -91,18 +91,19 @@ export const createEditForm = () => {
     <h3>Steps</h3>
     <button class="update-form-add-step">Add Step</button>
     <div class="update-form-steps"></div>
+    <button class="update-form-submit" data-id="${id}">Submit</button>
     `
 
     ingredients.forEach(ingredient => {
         const div = document.createElement('div')
         div.innerHTML = 
         `
-        <label for="update-form-qty">qty</label>
-        <input type="number" step="0.1" id="update-form-qty" value="${ingredient.childNodes[0].innerText}">
-        <label for="update-form-unit">unit</label>
-        <input type="text" id="update-form-unit" value="${ingredient.childNodes[2].innerText}">
-        <label for="update-form-name">name</label>
-        <input type="text" id="update-form-name" value="${ingredient.childNodes[4].innerText}">
+        <label>qty</label>
+        <input type="number" step="0.1" value="${ingredient.childNodes[0].innerText}">
+        <label>unit</label>
+        <input type="text" value="${ingredient.childNodes[2].innerText}">
+        <label>name</label>
+        <input type="text" value="${ingredient.childNodes[4].innerText}">
         <button class="update-form-delete-ingredient">Remove</button>
         `
         document.querySelector('.update-form-ingredients').appendChild(div)

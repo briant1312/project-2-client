@@ -20,8 +20,6 @@ export const logIn = (data) => {
     })
 }
 
-//=============
-
 export const createRecipe = (data) => {
     return fetch('http://localhost:3000/recipes', {
         method: 'POST',
