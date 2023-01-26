@@ -13,7 +13,8 @@ import {
     onLoginSuccess,
     onIndexSuccess,
     onCreateAccountSuccess,
-    onShowSuccess
+    onShowSuccess,
+    createEditForm
 } from './ui.js'
 
 // window.localStorage.clear()
@@ -74,13 +75,22 @@ signInButton.addEventListener('click', (e) => {
 
 const createIndexEventListeners = () => {
     const recipes = document.querySelectorAll('.recipe-overview')
-            recipes.forEach(recipe => {
-                recipe.addEventListener('click', () => {
-                    const id = recipe.getAttribute('data-id')
-                    indexContainer.innerHTML = ''
-                    showRecipe(id)
-                        .then(res => res.json())
-                        .then(recipe => onShowSuccess(recipe.recipe))
-                })
-            })
+    recipes.forEach(recipe => {
+        recipe.addEventListener('click', () => {
+            const id = recipe.getAttribute('data-id')
+            indexContainer.innerHTML = ''
+            showRecipe(id)
+                .then(res => res.json())
+                .then(recipe => onShowSuccess(recipe.recipe))
+                .then(() => createEditButtonEventListener())
+                .catch(console.error)
+        })
+    })
+}
+
+const createEditButtonEventListener = () => {
+    const editButton = document.querySelector('.edit-recipe')
+    editButton.addEventListener('click', () => {
+        createEditForm()
+    })
 }

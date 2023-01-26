@@ -2,6 +2,7 @@ const indexContainer = document.querySelector('.index-container')
 const logInForm = document.querySelector('#log-in')
 const messageContainer = document.querySelector('.message-container')
 const showContainer = document.querySelector('.show-container')
+const updateRecipeForm = document.querySelector('#update-recipe')
 
 export const onLoginSuccess = (responseData) => {
     messageContainer.innerHTML = ''
@@ -41,14 +42,16 @@ export const onShowSuccess = (recipe) => {
     const ingredientsUl = document.createElement('ul')
     recipe.ingredients.forEach(ingredient => {
         const li = document.createElement('li')
-        li.innerText = `${ingredient.qty} ${ingredient.unit} of ${ingredient.name}`
+        li.innerHTML = `<span class="ingredient-qty">${ingredient.qty}</span> 
+                        <span class="ingredient-unit">${ingredient.unit}</span> of
+                        <span class="ingredient-name">${ingredient.name}</span>`
         ingredientsUl.appendChild(li)
     })
     div.innerHTML = 
     `
     <h2>${recipe.name}</h2>
-    <p>${recipe.description}</p>
-    <p>Time: ${recipe.time} Minutes</p>
+    <p class="description">${recipe.description}</p>
+    <p>Time: <span class='recipe-time'>${recipe.time}</span> Minutes</p>
     `
     const ingredientsHeader = document.createElement('h3')
     ingredientsHeader.innerText = 'Ingredients'
@@ -59,4 +62,54 @@ export const onShowSuccess = (recipe) => {
     div.appendChild(ingredientsUl)
     div.appendChild(stepsHeader)
     div.appendChild(stepsOl)
+
+    const editButton = document.createElement('button')
+    editButton.innerText = 'Edit'
+    editButton.classList.add('edit-recipe')
+    editButton.setAttribute('data-id', recipe._id)
+    showContainer.appendChild(editButton)
+}
+
+export const createEditForm = () => {
+    const name = document.querySelector('.show-container h2')
+    const description = document.querySelector('.description')
+    const time = document.querySelector('.recipe-time')
+    const ingredients = document.querySelectorAll('.show-container ul>li')
+    const steps = document.querySelectorAll('.show-container ol>li')
+
+    updateRecipeForm.innerHTML = 
+    `
+    <label for="name">Name:</label>
+    <input id="name" type="text" value="${name.innerText}">
+    <label for="description">Description</label>
+    <input id="description" type="text" value="${description.innerText}">
+    <label for="time" >Time(in minutes):</label>
+    <input id="time" type="Number" value="${time.innerText}">
+    <div class="update-form-ingredients"><h3>Ingredients</h3></div>
+    <div class="update-form-steps"><h3>Steps</h3></div>
+    `
+
+    ingredients.forEach(ingredient => {
+        const div = document.createElement('div')
+        div.innerHTML = 
+        `
+        <label for="update-form-qty">qty</label>
+        <input type="number" id="update-form-qty" value="${ingredient.childNodes[0].innerText}">
+        <label for="update-form-unit">unit</label>
+        <input type="text" id="update-form-unit" value="${ingredient.childNodes[2].innerText}">
+        <label for="update-form-name">name</label>
+        <input type="text" id="update-form-name" value="${ingredient.childNodes[4].innerText}">
+        `
+        document.querySelector('.update-form-ingredients').appendChild(div)
+    })
+
+    steps.forEach(step => {
+        const div = document.createElement('div')
+        div.innerHTML = 
+        `
+        <input type="text" value="${step.innerText}">
+        `
+        document.querySelector('.update-form-steps').appendChild(div)
+    })
+    showContainer.classList.add('hidden')
 }
