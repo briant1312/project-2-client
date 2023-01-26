@@ -1,10 +1,20 @@
 import {
     logIn,
-    signUp 
+    signUp,
+    createRecipe,
+    indexRecipes,
+    showRecipe,
+    updateRecipe,
+    deleteRecipe,
+    addIngredient,
+    deleteIngredient
 } from './api.js'
 import {
-    onLoginSuccess
+    onLoginSuccess,
+    onIndexSuccess
 } from './ui.js'
+
+// window.localStorage.clear()
 
 const signUpButton = document.querySelector('#sign-up')
 const signInButton = document.querySelector('#sign-in')
@@ -46,6 +56,12 @@ signInButton.addEventListener('click', (e) => {
     passwordInput.value = ''
     logIn(userData)
         .then(res => res.json())
-        .then(data => onLoginSuccess(data))
+        .then(token => {
+            onLoginSuccess(token)
+            return token
+        })
+        .then(token => indexRecipes(token.token))
+        .then(res => res.json())
+        .then(responseObject => onIndexSuccess(responseObject.recipes))
         .catch(console.error)
 })

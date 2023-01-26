@@ -27,18 +27,35 @@ export const createRecipe = (data) => {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${window.localStorage.getItem('token')}`
         },
         body: JSON.stringify(data)
     })
 }
 
-export const indexRecipes = () => {
-    return fetch('http://localhost:3000/recipes')
+export const indexRecipes = (token = null) => {
+    if(!token) {
+        return fetch('http://localhost:3000/recipes', {
+        headers: {
+            'Authorization': `Bearer ${window.localStorage.token}`
+        }
+    })
+    } else {
+        return fetch('http://localhost:3000/recipes', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+    }
 }
 
 export const showRecipe = (recipeId) => {
-    return fetch(`http://localhost:3000/recipes/${recipeId}`)
+    return fetch(`http://localhost:3000/recipes/${recipeId}`, {
+        headers: {
+            'Authorization': `Bearer ${window.localStorage.token}`
+        }
+    })
 } 
 
 export const updateRecipe = (data) => {
@@ -46,7 +63,8 @@ export const updateRecipe = (data) => {
         method: 'PATCH',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${window.localStorage.token}`
         },
         body: JSON.stringify(data)
     })
@@ -54,7 +72,10 @@ export const updateRecipe = (data) => {
 
 export const deleteRecipe = (recipeId) => {
     return fetch(`http://localhost:3000/recipes/${recipeId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${window.localStorage.token}`
+        }
     })
 }
 
@@ -63,7 +84,8 @@ export const addIngredient = (data, recipeId) => {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${window.localStorage.token}`
         },
         body: JSON.stringify(data)
     })
@@ -74,7 +96,8 @@ export const deleteIngredient = (data, recipeId) => {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${window.localStorage.token}`
         },
         body: JSON.stringify(ingredientId)
     })
