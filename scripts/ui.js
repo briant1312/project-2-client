@@ -32,6 +32,8 @@ export const onIndexSuccess = (recipes) => {
 }
 
 export const onShowSuccess = (recipe) => {
+    showContainer.innerHTML = ''
+    showContainer.classList.remove('hidden')
     const div = document.createElement('div')
     const stepsOl = document.createElement('ol')
     recipe.steps.forEach(step => {
@@ -79,12 +81,12 @@ export const createEditForm = (id) => {
 
     updateRecipeForm.innerHTML = 
     `
-    <label for="name">Name:</label>
-    <input id="name" type="text" value="${name.innerText}">
-    <label for="description">Description</label>
-    <input id="description" type="text" value="${description.innerText}">
-    <label for="time" >Time(in minutes):</label>
-    <input id="time" type="Number" value="${time.innerText}">
+    <label>Name:</label>
+    <input class="update-form-name" type="text" value="${name.innerText}">
+    <label>Description</label>
+    <input class="update-form-description" type="text" value="${description.innerText}">
+    <label>Time(in minutes):</label>
+    <input class="update-form-time" type="number" value="${time.innerText}">
     <h3>Ingredients</h3>
     <button class="update-form-add-ingredient">Add Ingredient</button>
     <div class="update-form-ingredients"></div>

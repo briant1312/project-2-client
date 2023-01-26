@@ -22,6 +22,7 @@ import {
 const signUpButton = document.querySelector('#sign-up')
 const signInButton = document.querySelector('#sign-in')
 const indexContainer = document.querySelector('.index-container')
+const updateRecipeForm = document.querySelector('#update-recipe')
 
 
 signUpButton.addEventListener('click', (e) => {
@@ -160,9 +161,9 @@ const createSubmitFormEventListener = () => {
     const submitButton = document.querySelector('.update-form-submit')
     submitButton.addEventListener('click', (e) => {
         e.preventDefault()
-        const name = document.querySelector('.recipe-name').innerText
-        const description = document.querySelector('.description').innerText
-        const time = document.querySelector('.recipe-time').innerText
+        const name = document.querySelector('.update-form-name').value
+        const description = document.querySelector('.update-form-description').value
+        const time = document.querySelector('.update-form-time').value
         const stepsArray = []
         const ingredientsArray = []
         const steps = document.querySelectorAll('.update-form-steps input')
@@ -188,6 +189,12 @@ const createSubmitFormEventListener = () => {
                 ingredients: ingredientsArray
             }
         }
-        console.log(updatedRecipe)
+        updateRecipeForm.innerHTML = ''
+        updateRecipe(updatedRecipe, submitButton.getAttribute('data-id'))
+            .then(() => indexRecipes())
+            .then(res => res.json())
+            .then(responseObject => onIndexSuccess(responseObject.recipes))
+            .then(() => createIndexEventListeners())
+            .catch(console.error)
     })
 }

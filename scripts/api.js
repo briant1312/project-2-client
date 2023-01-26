@@ -56,7 +56,7 @@ export const showRecipe = (recipeId) => {
     })
 } 
 
-export const updateRecipe = (data) => {
+export const updateRecipe = (data, recipeId) => {
     return fetch(`http://localhost:3000/recipes/${recipeId}`, {
         method: 'PATCH',
         headers: {
