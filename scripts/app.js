@@ -11,13 +11,17 @@ import {
 } from './api.js'
 import {
     onLoginSuccess,
-    onIndexSuccess
+    onIndexSuccess,
+    onCreateAccountSuccess,
+    onShowSuccess
 } from './ui.js'
 
 // window.localStorage.clear()
 
 const signUpButton = document.querySelector('#sign-up')
 const signInButton = document.querySelector('#sign-in')
+const indexContainer = document.querySelector('.index-container')
+
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -36,7 +40,8 @@ signUpButton.addEventListener('click', (e) => {
     passwordInput.value = ''
     signUp(userData)
         .then(res => res.json())
-        .then(console.log)
+        .then(onCreateAccountSuccess)
+        .catch(console.error)
 })
 
 signInButton.addEventListener('click', (e) => {
@@ -63,5 +68,19 @@ signInButton.addEventListener('click', (e) => {
         .then(token => indexRecipes(token.token))
         .then(res => res.json())
         .then(responseObject => onIndexSuccess(responseObject.recipes))
+        .then(() => createIndexEventListeners())
         .catch(console.error)
 })
+
+const createIndexEventListeners = () => {
+    const recipes = document.querySelectorAll('.recipe-overview')
+            recipes.forEach(recipe => {
+                recipe.addEventListener('click', () => {
+                    const id = recipe.getAttribute('data-id')
+                    indexContainer.innerHTML = ''
+                    showRecipe(id)
+                        .then(res => res.json())
+                        .then(recipe => onShowSuccess(recipe.recipe))
+                })
+            })
+}
