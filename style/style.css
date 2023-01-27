@@ -43,7 +43,7 @@ nav a {
     font-size: var(--font-size-small);
     color: #243763;
     font-weight: 700;
-    text-shadow: 0 0 3px white;
+    text-shadow: 0 0 4px white;
 }
 
 .logout {
@@ -128,8 +128,10 @@ body {
     width: fit-content;
     margin: 0 auto;
     font-size: 1.8rem;
-    border-bottom: 1px solid gray;
+    text-decoration: underline;
     font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 /* ========== show screen ========== */
@@ -137,6 +139,8 @@ body {
 .recipe-name {
     font-size: 2rem;
     text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 .show-container .description {
