@@ -76,7 +76,10 @@ signInButton.addEventListener('click', (e) => {
         .then(token => indexRecipes(token.token))
         .then(res => res.json())
         .then(responseObject => onIndexSuccess(responseObject.recipes))
-        .then(() => createIndexEventListeners())
+        .then(() => {
+            createIndexEventListeners()
+            document.querySelector('nav').classList.remove('hidden')
+        })
         .catch(console.error)
 })
 
@@ -105,6 +108,7 @@ const createEditButtonEventListener = (id) => {
         createAddIngredientEventListener('update')
         createAddStepEventListener('update')
         createUpdateFormEventListener()
+        createDeleteFormEventListener()
     })
 }
 
@@ -170,6 +174,20 @@ const createUpdateFormEventListener = () => {
         const updatedRecipe = generateRecipeObject('update')
         updateRecipeForm.innerHTML = ''
         updateRecipe(updatedRecipe, submitButton.getAttribute('data-id'))
+            .then(() => indexRecipes())
+            .then(res => res.json())
+            .then(responseObject => onIndexSuccess(responseObject.recipes))
+            .then(() => createIndexEventListeners())
+            .catch(console.error)
+    })
+}
+
+const createDeleteFormEventListener = () => {
+    const deleteButton = document.querySelector('.delete-recipe-submit')
+    deleteButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        updateRecipeForm.innerHTML = ''
+        deleteRecipe(deleteButton.getAttribute('data-id'))
             .then(() => indexRecipes())
             .then(res => res.json())
             .then(responseObject => onIndexSuccess(responseObject.recipes))
