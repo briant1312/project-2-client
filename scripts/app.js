@@ -13,7 +13,9 @@ import {
     onCreateAccountSuccess,
     onShowSuccess,
     createEditForm,
-    craeteAddRecipeForm
+    craeteAddRecipeForm,
+    onFailure,
+    userInputError
 } from './ui.js'
 
 const signUpButton = document.querySelector('#sign-up')
@@ -49,7 +51,7 @@ signUpButton.addEventListener('click', (e) => {
     signUp(userData)
         .then(res => res.json())
         .then(onCreateAccountSuccess)
-        .catch(console.error)
+        .catch(onFailure)
 })
 
 signInButton.addEventListener('click', (e) => {
@@ -68,6 +70,7 @@ signInButton.addEventListener('click', (e) => {
     userNameInput.value = ''
     passwordInput.value = ''
     logIn(userData)
+        .then(res => checkResponseStatusCode(res))
         .then(res => res.json())
         .then(token => {
             onLoginSuccess(token)
@@ -80,7 +83,7 @@ signInButton.addEventListener('click', (e) => {
             createIndexEventListeners()
             navBar.classList.remove('hidden')
         })
-        .catch(console.error)
+        .catch(err => onFailure(err))
 })
 
 const createIndexEventListeners = () => {
@@ -93,7 +96,7 @@ const createIndexEventListeners = () => {
                 .then(res => res.json())
                 .then(recipe => onShowSuccess(recipe.recipe))
                 .then(() => createEditButtonEventListener(id))
-                .catch(console.error)
+                .catch(onFailure)
         })
     })
 }
@@ -172,13 +175,18 @@ const createUpdateFormEventListener = () => {
     submitButton.addEventListener('click', (e) => {
         e.preventDefault()
         const updatedRecipe = generateRecipeObject('update')
+        if(!isRecipeObjectValid(updatedRecipe)) {
+            userInputError()
+            return
+        }
         updateRecipeForm.innerHTML = ''
         updateRecipe(updatedRecipe, submitButton.getAttribute('data-id'))
+            .then(res => checkResponseStatusCode(res))
             .then(() => indexRecipes())
             .then(res => res.json())
             .then(responseObject => onIndexSuccess(responseObject.recipes))
             .then(() => createIndexEventListeners())
-            .catch(console.error)
+            .catch(err => onFailure(err))
     })
 }
 
@@ -188,11 +196,12 @@ const createDeleteFormEventListener = () => {
         e.preventDefault()
         updateRecipeForm.innerHTML = ''
         deleteRecipe(deleteButton.getAttribute('data-id'))
+            .then(res => checkResponseStatusCode(res))
             .then(() => indexRecipes())
             .then(res => res.json())
             .then(responseObject => onIndexSuccess(responseObject.recipes))
             .then(() => createIndexEventListeners())
-            .catch(console.error)
+            .catch(err => onFailure(err))
     })
 }
 
@@ -201,13 +210,18 @@ const createAddNewFormEventListener = () => {
     submitButton.addEventListener('click', (e) => {
         e.preventDefault()
         const newRecipe = generateRecipeObject('add-recipe')
+        if(!isRecipeObjectValid(newRecipe)) {
+            userInputError()
+            return
+        }
         addNewRecipeForm.innerHTML = ''
         createRecipe(newRecipe, submitButton.getAttribute('data-id'))
+            .then(res => checkResponseStatusCode(res))
             .then(() => indexRecipes())
             .then(res => res.json())
             .then(responseObject => onIndexSuccess(responseObject.recipes))
             .then(() => createIndexEventListeners())
-            .catch(console.error)
+            .catch(err => onFailure(err))
     })
 }
 
@@ -243,6 +257,25 @@ const generateRecipeObject = (formBaseName) => {
     return recipe
 }
 
+const isRecipeObjectValid = (recipe) => {
+    for(let key in recipe.recipe) {
+        if(recipe.recipe[key] === null || recipe.recipe[key] === '') {
+            return false
+        } for(let step of recipe.recipe.steps) {
+            if(step === null || step === '') {
+                return false
+            }
+        } for(let ingredient of recipe.recipe.ingredients) {
+            for(let key in ingredient) {
+                if(ingredient[key] === null || ingredient[key] === '') {
+                    return false
+                }
+            }
+        }
+    }
+    return true
+}
+
 addNewRecipe.addEventListener('click', () => {
     clearContent()
     craeteAddRecipeForm()
@@ -267,7 +300,7 @@ homeButton.addEventListener('click', () => {
     .then(res => res.json())
     .then(responseObject => onIndexSuccess(responseObject.recipes))
     .then(() => createIndexEventListeners())
-    .catch(console.error)
+    .catch(onFailure)
 })
 
 logoutButton.addEventListener('click', () => {
@@ -276,3 +309,21 @@ logoutButton.addEventListener('click', () => {
     navBar.classList.add('hidden')
     logInForm.classList.remove('hidden')
 })
+
+const checkResponseStatusCode = (res) => {
+    let message
+    if(res.statusText === 'Unprocessable Entity') {
+        message = 'Username or password was incorrect'
+    }else if(res.statusText === 'Internal Server Error') {
+        message = 'There was a problem processing your request'
+    } else {
+        message = res.statusText
+    }
+    if(res.status >= 400 && res.status < 500) {
+        throw {status: res.status, message: message}
+    }
+    if(res.status >= 500) {
+        throw {status: res.status, message: message}
+    }
+    return res
+}

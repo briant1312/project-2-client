@@ -5,6 +5,22 @@ const showContainer = document.querySelector('.show-container')
 const updateRecipeForm = document.querySelector('#update-recipe')
 const addNewRecipeForm = document.querySelector('#add-recipe')
 
+export const onFailure = (err) => {
+    messageContainer.innerHTML = 
+    `
+    <h3>Oops! There was an error</h3>
+    <p>server responded with status: ${err.status}</p>
+    <p>${err.message}</p>
+    `
+}
+
+export const userInputError = () => {
+    messageContainer.innerHTML = 
+    `
+    <h3>All fields must be populated to submit</h3>
+    `
+}
+
 export const onLoginSuccess = (responseData) => {
     messageContainer.innerHTML = ''
     window.localStorage.setItem('token', responseData.token)
