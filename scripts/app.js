@@ -162,7 +162,7 @@ const createAddStepEventListener = (formBaseName) => {
         const div = document.createElement('div')
         div.innerHTML = 
         `
-        <input type="text">
+        <textarea></textarea>
         <button class="${formBaseName}-form-delete-step">Remove</button>
         `
         document.querySelector(`.${formBaseName}-form-steps`).appendChild(div)
@@ -179,7 +179,7 @@ const createUpdateFormEventListener = () => {
             userInputError()
             return
         }
-        updateRecipeForm.innerHTML = ''
+        clearContent()
         updateRecipe(updatedRecipe, submitButton.getAttribute('data-id'))
             .then(res => checkResponseStatusCode(res))
             .then(() => indexRecipes())
@@ -194,7 +194,7 @@ const createDeleteFormEventListener = () => {
     const deleteButton = document.querySelector('.delete-recipe-submit')
     deleteButton.addEventListener('click', (e) => {
         e.preventDefault()
-        updateRecipeForm.innerHTML = ''
+        clearContent()
         deleteRecipe(deleteButton.getAttribute('data-id'))
             .then(res => checkResponseStatusCode(res))
             .then(() => indexRecipes())
@@ -214,7 +214,7 @@ const createAddNewFormEventListener = () => {
             userInputError()
             return
         }
-        addNewRecipeForm.innerHTML = ''
+        clearContent()
         createRecipe(newRecipe, submitButton.getAttribute('data-id'))
             .then(res => checkResponseStatusCode(res))
             .then(() => indexRecipes())
@@ -231,7 +231,7 @@ const generateRecipeObject = (formBaseName) => {
     const time = document.querySelector(`.${formBaseName}-form-time`).value
     const stepsArray = []
     const ingredientsArray = []
-    const steps = document.querySelectorAll(`.${formBaseName}-form-steps input`)
+    const steps = document.querySelectorAll(`.${formBaseName}-form-steps textarea`)
     for(let step of steps) {
         stepsArray.push(step.value)
     }

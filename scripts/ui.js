@@ -6,12 +6,26 @@ const updateRecipeForm = document.querySelector('#update-recipe')
 const addNewRecipeForm = document.querySelector('#add-recipe')
 
 export const onFailure = (err) => {
-    messageContainer.innerHTML = 
+    if(err.status) {
+        messageContainer.innerHTML = 
     `
     <h3>Oops! There was an error</h3>
     <p>server responded with status: ${err.status}</p>
     <p>${err.message}</p>
     `
+    } else if(err == 'TypeError: Failed to fetch') {
+        messageContainer.innerHTML = 
+        `
+        <h3>Server is currently down</h3>
+        <p>Please try again later</p>
+        `
+    } else {
+        messageContainer.innerHTML = 
+        `
+        <h3>Oops! There was an error</h3>
+        <p>${err}</p>
+        `
+    }
 }
 
 export const userInputError = () => {
@@ -133,7 +147,7 @@ export const createEditForm = (id) => {
         const div = document.createElement('div')
         div.innerHTML = 
         `
-        <input type="text" value="${step.innerText}">
+        <textarea>${step.innerText}</textarea>
         <button class="update-form-delete-step">Remove</button>
         `
         document.querySelector('.update-form-steps').appendChild(div)
@@ -175,7 +189,7 @@ export const craeteAddRecipeForm = () => {
     const stepDiv = document.createElement('div')
     stepDiv.innerHTML = 
     `
-    <input type="text">
+    <textarea></textarea>
     <button class="add-recipe-form-delete-step">Remove</button>
     `
     document.querySelector('.add-recipe-form-steps').appendChild(stepDiv)
