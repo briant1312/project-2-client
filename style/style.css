@@ -1,3 +1,185 @@
+/* ========== reset ========== */
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Archivo', sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+/* ========== global variables ========== */
+:root {
+    --font-size-small: 1.6rem;
+}
+
+/* ========== utility classes ========== */
+
 .hidden {
-    display: none;
+    display: none !important;
+}
+
+/* ========== main content ========== */
+
+nav {
+    height: 5rem;
+    background-color: #FF6E31;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+}
+
+
+nav a {
+    font-size: var(--font-size-small);
+    color: #243763;
+    font-weight: 700;
+    text-shadow: 0 0 3px white;
+}
+
+.logout {
+    margin-left: auto;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 8rem;
+    font-weight: 400;
+}
+
+body {
+    background-color: rgb(222, 222, 222);
+}
+
+/* ========== login screen ========== */
+
+#log-in {
+    font-size: var(--font-size-small);
+    border: 1px solid black;
+    border-radius: 5px;
+    max-width: 80%;
+    margin: 5rem auto;
+    padding: 6rem 2rem;
+    display: grid;
+    grid-template-rows: 1fr;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}
+
+#log-in h2 {
+    font-size: var(--font-size-small);
+    font-weight: 300;
+}
+
+.input-container {
+    width: fit-content;
+}
+
+.input-container > * {
+    font-size: var(--font-size-small);
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: .7rem;
+}
+
+#sign-in,
+#sign-up {
+    position: absolute;
+    padding: .5rem 2rem;
+    border-radius: 10px;
+}
+
+#sign-in {
+    bottom: 2rem;
+    left: 3rem;
+    background-color: rgb(60, 119, 238);
+    color: white;
+}
+
+#sign-up {
+    bottom: 2rem;
+    right: 3rem;
+}
+
+/* ========== index screen ========== */
+
+.index-container {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 2rem;
+    align-content: center;
+}
+
+.recipe-overview h2 {
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 1.8rem;
+    border-bottom: 1px solid gray;
+    font-weight: 400;
+}
+
+/* ========== show screen ========== */
+
+.recipe-name {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.show-container .description {
+    font-size: var(--font-size-small);
+    text-align: center;
+    color: rgb(70, 70, 70);
+    margin-bottom: 2rem;
+}
+
+.description::before {
+    content: '-';
+}
+
+.show-container p {
+    font-size: 2.4rem;
+    text-align: center;
+    font-weight: 100;
+}
+
+.show-container h3 {
+    font-size: var(--font-size-small);
+    margin: 2rem 4rem;
+}
+
+.show-container ul,
+.show-container ol {
+    margin: 1rem 6rem;
+}
+
+.show-container li {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.show-container ol li {
+    margin-bottom: 2rem;
+}
+
+.edit-recipe {
+    margin-left: 3rem;
+    padding: .5rem 2rem;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(194, 165, 96);
 }
