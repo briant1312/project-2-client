@@ -25,6 +25,7 @@ const signInButton = document.querySelector('#sign-in')
 const indexContainer = document.querySelector('.index-container')
 const showContainer = document.querySelector('.show-container')
 const updateRecipeForm = document.querySelector('#update-recipe')
+const addNewRecipeForm = document.querySelector('#add-recipe')
 const homeButton = document.querySelector('.home-button')
 const addNewRecipe = document.querySelector('.add-new-recipe')
 const messageContainer = document.querySelector('.message-container')
@@ -166,34 +167,7 @@ const createUpdateFormEventListener = () => {
     const submitButton = document.querySelector('.update-form-submit')
     submitButton.addEventListener('click', (e) => {
         e.preventDefault()
-        const name = document.querySelector('.update-form-name').value
-        const description = document.querySelector('.update-form-description').value
-        const time = document.querySelector('.update-form-time').value
-        const stepsArray = []
-        const ingredientsArray = []
-        const steps = document.querySelectorAll('.update-form-steps input')
-        for(let step of steps) {
-            stepsArray.push(step.value)
-        }
-        const ingredients = document.querySelectorAll('.update-form-ingredients input')
-        for(let i = 0; i < ingredients.length; i += 3) {
-            const ingredient = {
-                qty: ingredients[i].value,
-                unit: ingredients[i+1].value,
-                name: ingredients[i+2].value
-            }
-            ingredientsArray.push(ingredient)
-        }
-        
-        const updatedRecipe = {
-            recipe: {
-                name: name,
-                description: description,
-                time: time,
-                steps: stepsArray,
-                ingredients: ingredientsArray
-            }
-        }
+        const updatedRecipe = generateRecipeObject('update')
         updateRecipeForm.innerHTML = ''
         updateRecipe(updatedRecipe, submitButton.getAttribute('data-id'))
             .then(() => indexRecipes())
@@ -204,6 +178,53 @@ const createUpdateFormEventListener = () => {
     })
 }
 
+const createAddNewFormEventListener = () => {
+    const submitButton = document.querySelector('.add-recipe-form-submit')
+    submitButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        const newRecipe = generateRecipeObject('add-recipe')
+        addNewRecipeForm.innerHTML = ''
+        createRecipe(newRecipe, submitButton.getAttribute('data-id'))
+            .then(() => indexRecipes())
+            .then(res => res.json())
+            .then(responseObject => onIndexSuccess(responseObject.recipes))
+            .then(() => createIndexEventListeners())
+            .catch(console.error)
+    })
+}
+
+const generateRecipeObject = (formBaseName) => {
+    const name = document.querySelector(`.${formBaseName}-form-name`).value
+    const description = document.querySelector(`.${formBaseName}-form-description`).value
+    const time = document.querySelector(`.${formBaseName}-form-time`).value
+    const stepsArray = []
+    const ingredientsArray = []
+    const steps = document.querySelectorAll(`.${formBaseName}-form-steps input`)
+    for(let step of steps) {
+        stepsArray.push(step.value)
+    }
+    const ingredients = document.querySelectorAll(`.${formBaseName}-form-ingredients input`)
+    for(let i = 0; i < ingredients.length; i += 3) {
+        const ingredient = {
+            qty: ingredients[i].value,
+            unit: ingredients[i+1].value,
+            name: ingredients[i+2].value
+        }
+        ingredientsArray.push(ingredient)
+    }
+    
+    const recipe = {
+        recipe: {
+            name: name,
+            description: description,
+            time: time,
+            steps: stepsArray,
+            ingredients: ingredientsArray
+        }
+    }
+    return recipe
+}
+
 addNewRecipe.addEventListener('click', () => {
     clearContent()
     craeteAddRecipeForm()
@@ -211,6 +232,7 @@ addNewRecipe.addEventListener('click', () => {
     createDeleteStepEventListener('add-recipe')
     createAddIngredientEventListener('add-recipe')
     createAddStepEventListener('add-recipe')
+    createAddNewFormEventListener()
 })
 
 const clearContent = () => {
