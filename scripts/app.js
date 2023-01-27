@@ -6,8 +6,6 @@ import {
     showRecipe,
     updateRecipe,
     deleteRecipe,
-    addIngredient,
-    deleteIngredient
 } from './api.js'
 import {
     onLoginSuccess,
@@ -18,8 +16,6 @@ import {
     craeteAddRecipeForm
 } from './ui.js'
 
-// window.localStorage.clear()
-
 const signUpButton = document.querySelector('#sign-up')
 const signInButton = document.querySelector('#sign-in')
 const indexContainer = document.querySelector('.index-container')
@@ -29,6 +25,10 @@ const addNewRecipeForm = document.querySelector('#add-recipe')
 const homeButton = document.querySelector('.home-button')
 const addNewRecipe = document.querySelector('.add-new-recipe')
 const messageContainer = document.querySelector('.message-container')
+const logoutButton = document.querySelector('.logout')
+const navBar = document.querySelector('nav')
+const logInForm = document.querySelector('#log-in')
+
 
 
 signUpButton.addEventListener('click', (e) => {
@@ -78,7 +78,7 @@ signInButton.addEventListener('click', (e) => {
         .then(responseObject => onIndexSuccess(responseObject.recipes))
         .then(() => {
             createIndexEventListeners()
-            document.querySelector('nav').classList.remove('hidden')
+            navBar.classList.remove('hidden')
         })
         .catch(console.error)
 })
@@ -258,4 +258,21 @@ const clearContent = () => {
     indexContainer.innerHTML = ''
     showContainer.innerHTML = ''
     updateRecipeForm.innerHTML = ''
+    addNewRecipeForm.innerHTML = ''
 }
+
+homeButton.addEventListener('click', () => {
+    clearContent()
+    indexRecipes()
+    .then(res => res.json())
+    .then(responseObject => onIndexSuccess(responseObject.recipes))
+    .then(() => createIndexEventListeners())
+    .catch(console.error)
+})
+
+logoutButton.addEventListener('click', () => {
+    clearContent()
+    window.localStorage.clear()
+    navBar.classList.add('hidden')
+    logInForm.classList.remove('hidden')
+})

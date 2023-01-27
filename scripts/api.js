@@ -76,27 +76,3 @@ export const deleteRecipe = (recipeId) => {
         }
     })
 }
-
-export const addIngredient = (data, recipeId) => {
-    return fetch(`http://localhost:3000/ingredients/${recipeId}`, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${window.localStorage.token}`
-        },
-        body: JSON.stringify(data)
-    })
-}
-
-export const deleteIngredient = (data, recipeId) => {
-    return fetch(`http://localhost:3000/ingredients/${recipeId}`, {
-        method: 'DELETE',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${window.localStorage.token}`
-        },
-        body: JSON.stringify(ingredientId)
-    })
-}
