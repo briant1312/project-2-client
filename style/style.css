@@ -187,3 +187,73 @@ body {
     border: none;
     background-color: rgb(194, 165, 96);
 }
+
+/* ========== add recipe screen ========== */
+
+#add-recipe {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+#add-recipe input {
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+}
+
+#add-recipe h3 {
+    font-size: var(--font-size-small);
+    margin: 1rem;
+}
+
+#add-recipe label {
+    font-size: 1.2rem;
+}
+
+#add-recipe button {
+    width: fit-content;
+    padding: .2rem .5rem; 
+    border-radius: 5px;
+}
+
+.add-recipe-form-add-ingredient {
+    margin-bottom: 1rem;
+}
+
+.add-recipe-form-ingredients div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem;
+    margin-bottom: 1rem;
+}
+
+#add-recipe .add-recipe-form-ingredients input {
+    width: 5rem;
+    font-size: var(--font-size-small);
+    line-height: 1;
+}
+
+.add-recipe-form-ingredients button {
+    margin-left: auto;
+}
+
+.add-recipe-form-add-step {
+    margin-bottom: 1rem;
+}
+
+.add-recipe-form-steps button {
+    float: right;
+}
+
+.add-recipe-form-steps textarea{
+    width: 75%;
+    height: 8rem;
+    padding: .5rem;
+}
+
+.add-recipe-form-submit {
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+}
