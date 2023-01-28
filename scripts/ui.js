@@ -4,8 +4,10 @@ const messageContainer = document.querySelector('.message-container')
 const showContainer = document.querySelector('.show-container')
 const updateRecipeForm = document.querySelector('#update-recipe')
 const addNewRecipeForm = document.querySelector('#add-recipe')
+const messageContainerBox = document.querySelector('.message-container-box')
 
 export const onFailure = (err) => {
+    messageContainerBox.classList.remove('hidden')
     if(err == 'TypeError: Failed to fetch') {
         messageContainer.innerHTML = 
         `
@@ -22,9 +24,11 @@ export const onFailure = (err) => {
 }
 
 export const userInputError = () => {
+    messageContainerBox.classList.remove('hidden')
     messageContainer.innerHTML = 
     `
-    <h3>All fields must be populated to submit</h3>
+    <h3>Oops! There was an error</h3>
+    <p>All fields must be populated to submit</p>
     `
 }
 
@@ -35,10 +39,11 @@ export const onLoginSuccess = (responseData) => {
 }
 
 export const onCreateAccountSuccess = (userData) => {
+    messageContainerBox.classList.remove('hidden')
     messageContainer.innerHTML = 
     `
-    <h3>Username ${userData.userName} has been created successfully </h3>
-    <p>Please login with your credentials</p>
+    <h3 class='success-message'>Username ${userData.userName} has been created successfully </h3>
+    <p class='success-message'>Please login with your credentials</p>
     `
 }
 

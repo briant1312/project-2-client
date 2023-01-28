@@ -30,6 +30,8 @@ const messageContainer = document.querySelector('.message-container')
 const logoutButton = document.querySelector('.logout')
 const navBar = document.querySelector('nav')
 const logInForm = document.querySelector('#log-in')
+const closeMessageContainerSpan = document.querySelector('.close-message-container')
+const messageContainerBox = document.querySelector('.message-container-box')
 
 
 
@@ -48,7 +50,9 @@ signUpButton.addEventListener('click', (e) => {
     }
     userNameInput.value = ''
     passwordInput.value = ''
+    clearContent()
     signUp(userData)
+        .then(res => checkResponseStatusCode(res))
         .then(res => res.json())
         .then(onCreateAccountSuccess)
         .catch(onFailure)
@@ -69,6 +73,7 @@ signInButton.addEventListener('click', (e) => {
     }
     userNameInput.value = ''
     passwordInput.value = ''
+    clearContent()
     logIn(userData)
         .then(res => checkResponseStatusCode(res))
         .then(res => res.json())
@@ -83,7 +88,7 @@ signInButton.addEventListener('click', (e) => {
             createIndexEventListeners()
             navBar.classList.remove('hidden')
         })
-        .catch(err => onFailure(err))
+        .catch(onFailure)
 })
 
 const createIndexEventListeners = () => {
@@ -287,6 +292,7 @@ addNewRecipe.addEventListener('click', () => {
 })
 
 const clearContent = () => {
+    messageContainerBox.classList.add('hidden')
     messageContainer.innerHTML = ''
     indexContainer.innerHTML = ''
     showContainer.innerHTML = ''
@@ -327,3 +333,8 @@ const checkResponseStatusCode = (res) => {
     }
     return res
 }
+
+closeMessageContainerSpan.addEventListener('click', () => {
+    messageContainerBox.classList.add('hidden')
+    messageContainer.innerHTML = ''
+})
