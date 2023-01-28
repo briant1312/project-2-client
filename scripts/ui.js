@@ -124,8 +124,10 @@ export const createEditForm = (id) => {
     <h3>Steps</h3>
     <button class="update-form-add-step">Add Step</button>
     <div class="update-form-steps"></div>
-    <button class="update-form-submit" data-id="${id}">Submit</button>
-    <button class="delete-recipe-submit" data-id="${id}">Delete</button>
+    <div class="update-form-button-container">
+        <button class="update-form-submit" data-id="${id}">Submit</button>
+        <button class="delete-recipe-submit" data-id="${id}">Delete</button>
+    </div>
     `
 
     ingredients.forEach(ingredient => {
