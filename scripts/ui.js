@@ -6,14 +6,7 @@ const updateRecipeForm = document.querySelector('#update-recipe')
 const addNewRecipeForm = document.querySelector('#add-recipe')
 
 export const onFailure = (err) => {
-    if(err.status) {
-        messageContainer.innerHTML = 
-    `
-    <h3>Oops! There was an error</h3>
-    <p>server responded with status: ${err.status}</p>
-    <p>${err.message}</p>
-    `
-    } else if(err == 'TypeError: Failed to fetch') {
+    if(err == 'TypeError: Failed to fetch') {
         messageContainer.innerHTML = 
         `
         <h3>Server is currently down</h3>
@@ -140,7 +133,7 @@ export const createEditForm = (id) => {
         <input type="text" value="${ingredient.childNodes[2].innerText}">
         <label>name</label>
         <input type="text" value="${ingredient.childNodes[4].innerText}">
-        <button class="update-form-delete-ingredient">Remove</button>
+        <button class="update-form-delete-ingredient">&times;</button>
         `
         document.querySelector('.update-form-ingredients').appendChild(div)
     })
@@ -150,7 +143,7 @@ export const createEditForm = (id) => {
         div.innerHTML = 
         `
         <textarea>${step.innerText}</textarea>
-        <button class="update-form-delete-step">Remove</button>
+        <button class="update-form-delete-step">&times</button>
         `
         document.querySelector('.update-form-steps').appendChild(div)
     })
@@ -184,7 +177,7 @@ export const craeteAddRecipeForm = () => {
         <input type="text">
         <label>name</label>
         <input type="text">
-        <button class="add-recipe-form-delete-ingredient">Remove</button>
+        <button class="add-recipe-form-delete-ingredient">&times;</button>
         `
     document.querySelector('.add-recipe-form-ingredients').appendChild(ingredientDiv)
 
@@ -192,7 +185,7 @@ export const craeteAddRecipeForm = () => {
     stepDiv.innerHTML = 
     `
     <textarea></textarea>
-    <button class="add-recipe-form-delete-step">Remove</button>
+    <button class="add-recipe-form-delete-step">&times;</button>
     `
     document.querySelector('.add-recipe-form-steps').appendChild(stepDiv)
 }

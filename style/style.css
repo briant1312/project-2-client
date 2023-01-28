@@ -36,6 +36,7 @@ nav {
     width: 100vw;
     position: fixed;
     top: 0;
+    z-index: 10;
 }
 
 
@@ -136,6 +137,11 @@ body {
 
 /* ========== show screen ========== */
 
+/* .show-container {
+    width: 80%;
+    margin: 0 auto;
+} */
+
 .recipe-name {
     font-size: 2rem;
     text-align: center;
@@ -165,9 +171,16 @@ body {
     margin: 2rem 4rem;
 }
 
-.show-container ul,
+/* .show-container ul, */
 .show-container ol {
     margin: 1rem 6rem;
+}
+
+.show-container ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    margin: 1rem 1rem 1rem 5rem;
 }
 
 .show-container li {
@@ -232,7 +245,6 @@ body {
 .add-recipe-form-ingredients div,
 .update-form-ingredients div {
     display: flex;
-    flex-wrap: wrap;
     gap: .2rem;
     margin-bottom: 1rem;
 }
@@ -246,7 +258,8 @@ body {
 
 .add-recipe-form-ingredients button,
 .update-form-ingredients button {
-    margin-left: auto;
+    margin-left: 3rem;
+    font-size: 1.6rem;
 }
 
 .add-recipe-form-add-step,
@@ -256,12 +269,19 @@ body {
 
 .add-recipe-form-steps button,
 .update-form-steps button {
-    float: right;
+    margin-left: 3rem;
+    font-size: 1.6rem;
+    position: absolute;
+}
+
+.update-form-steps div,
+.add-form-steps-div {
+    position: relative;
 }
 
 .add-recipe-form-steps textarea,
 .update-form-steps textarea {
-    width: 75%;
+    width: 80%;
     height: 8rem;
     padding: .5rem;
 }

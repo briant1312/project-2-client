@@ -148,7 +148,7 @@ const createAddIngredientEventListener = (formBaseName) => {
         <input type="text" id="${formBaseName}-form-unit">
         <label for="${formBaseName}-form-name">name</label>
         <input type="text" id="${formBaseName}-form-name">
-        <button class="${formBaseName}-form-delete-ingredient">Remove</button>
+        <button class="${formBaseName}-form-delete-ingredient">&times;</button>
         `
         document.querySelector(`.${formBaseName}-form-ingredients`).appendChild(div)
         createDeleteIngredientEventListener(formBaseName)
@@ -163,7 +163,7 @@ const createAddStepEventListener = (formBaseName) => {
         div.innerHTML = 
         `
         <textarea></textarea>
-        <button class="${formBaseName}-form-delete-step">Remove</button>
+        <button class="${formBaseName}-form-delete-step">&times;</button>
         `
         document.querySelector(`.${formBaseName}-form-steps`).appendChild(div)
         createDeleteStepEventListener(formBaseName)
@@ -320,10 +320,10 @@ const checkResponseStatusCode = (res) => {
         message = res.statusText
     }
     if(res.status >= 400 && res.status < 500) {
-        throw {status: res.status, message: message}
+        throw message
     }
     if(res.status >= 500) {
-        throw {status: res.status, message: message}
+        throw message
     }
     return res
 }
