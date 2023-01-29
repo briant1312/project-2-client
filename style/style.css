@@ -75,8 +75,9 @@ button {
     transform: translateX(-50%);
     z-index: 20;
     background-color: white;
-    padding: 3rem 3rem 2rem 2rem;
+    padding: 4rem 4rem 3rem 3rem;
     border-radius: 5px;
+    border: 1px solid #777;
 }
 
 .close-message-container {
@@ -131,6 +132,8 @@ button {
     position: absolute;
     padding: .5rem 2rem;
     border-radius: 10px;
+    font-size: 1.4rem;
+    cursor: pointer;
 }
 
 #sign-in {
@@ -155,9 +158,12 @@ button {
     align-content: center;
 }
 
-.recipe-overview h2 {
+.recipe-overview {
     width: fit-content;
     margin: 0 auto;
+}
+
+.recipe-overview h2 {
     font-size: 1.8rem;
     text-decoration: underline;
     font-weight: 400;
@@ -197,7 +203,6 @@ button {
     margin: 2rem 4rem;
 }
 
-/* .show-container ul, */
 .show-container ol {
     margin: 1rem 6rem;
 }
@@ -226,6 +231,7 @@ button {
     border: none;
     background-color: rgb(194, 165, 96);
     margin-bottom: 5rem;
+    font-size: 1.4rem;
 }
 
 /* ========== form styles ========== */
@@ -245,6 +251,11 @@ button {
     line-height: 1.5;
 }
 
+.update-form-time,
+.add-recipe-form-time {
+    width: 10rem;
+}
+
 #add-recipe h3,
 #update-recipe h3 {
     font-size: var(--font-size-small);
@@ -261,6 +272,7 @@ button {
     width: fit-content;
     padding: .2rem .5rem; 
     border-radius: 5px;
+    font-size: 1.4rem;
 }
 
 .add-recipe-form-add-ingredient,
@@ -310,6 +322,7 @@ button {
     width: 80%;
     height: 8rem;
     padding: .5rem;
+    font-size: 1.4rem;
 }
 
 .add-recipe-form-submit {
@@ -327,4 +340,74 @@ button {
 
 .delete-recipe-submit {
     margin-left: 50vw;
+}
+
+/* ========== media queries ========== */
+
+@media screen and (min-width: 37.5em) {
+    html {
+        font-size: 70%;
+    }
+
+    nav a {
+        margin-inline: 2rem;
+    }
+
+    #log-in {
+        max-width: 65%;
+    }
+
+    #add-recipe .add-recipe-form-ingredients input,
+    #update-recipe .update-form-ingredients input {
+        width: 10rem;
+    }
+
+    .show-container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+}
+
+@media screen and (min-width: 56.25em) {
+    html {
+        font-size: 80%;
+    }
+
+    #log-in {
+        max-width: 50%;
+    }
+
+    .show-container {
+        width: 70%;
+    }
+
+    #add-recipe .add-recipe-form-ingredients input,
+    #update-recipe .update-form-ingredients input {
+        width: 15rem;
+    }
+}
+
+@media screen and (min-width: 75em) {
+    html {
+        font-size: 85%;
+    }
+
+    nav a {
+        margin-inline: 4rem;
+    }
+
+    #log-in {
+        max-width: 40%;
+    }
+}
+
+@media screen and (min-width: 94em) {
+    #sign-in {
+        left: 10rem;
+    }
+
+    #sign-up {
+        right: 10rem;
+    }
 }
