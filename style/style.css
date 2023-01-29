@@ -30,6 +30,11 @@ html {
 
 /* ========== main content ========== */
 
+*::selection {
+    background-color: var(--color-primary);
+    color: white;
+}
+
 nav {
     height: 5rem;
     background-color: var(--color-primary);
@@ -67,8 +72,23 @@ body {
     background-color: rgb(233, 233, 233);
 }
 
-button {
+button,
+input[type=submit] {
     cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+    transition: all 300ms;
+}
+
+button:hover,
+input[type=submit]:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, .4);
+}
+
+button:active,
+input[type=submit]:active {
+    transform: translateY(1px);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .4);
 }
 
 .message-container-box {
@@ -185,15 +205,12 @@ button {
     cursor: pointer;
     color: #181D31;
     padding: .8rem;
-    
-    background-image: linear-gradient(90deg, transparent 0%, transparent 50%, var(--color-primary) 50%);
-    background-size: 225%;
     transition: all .4s;
 }
 
 .recipe-overview h2:hover {
-    background-position: 100%;
-    transform: translateX(1rem);
+    transform: translateY(-2px);
+    color: var(--color-primary);
 }
 
 
@@ -254,7 +271,8 @@ button {
     padding: .5rem 2rem;
     border-radius: 10px;
     border: none;
-    background-color: var(--color-primary);
+    background-color: rgb(60, 119, 238);
+    color: white;
     margin-bottom: 5rem;
     font-size: var(--font-size-small);
 }
@@ -274,6 +292,13 @@ button {
 #update-recipe input {
     font-size: var(--font-size-md);
     line-height: 1.5;
+}
+
+#add-recipe input:focus,
+#update-recipe input:focus,
+.add-recipe-form-steps textarea:focus,
+.update-form-steps textarea:focus {
+   outline: 2px solid var(--color-primary);
 }
 
 .update-form-time,
@@ -303,6 +328,9 @@ button {
 .add-recipe-form-add-ingredient,
 .update-form-add-ingredient {
     margin-bottom: 1rem;
+
+    background-color: var(--color-secondary);
+    color: white;
 }
 
 .add-recipe-form-ingredients div,
@@ -323,11 +351,17 @@ button {
 .update-form-ingredients button {
     margin-left: 3rem;
     font-size: var(--font-size-md);
+
+    background-color: orangered;
+    color: white;
 }
 
 .add-recipe-form-add-step,
 .update-form-add-step {
     margin-bottom: 1rem;
+
+    background-color: var(--color-secondary);
+    color: white;
 }
 
 .add-recipe-form-steps button,
@@ -335,6 +369,9 @@ button {
     margin-left: 3rem;
     font-size: var(--font-size-md);
     position: absolute;
+
+    background-color: orangered;
+    color: white;
 }
 
 .update-form-steps div,
@@ -353,10 +390,15 @@ button {
 .add-recipe-form-submit {
     margin-top: 2rem;
     margin-bottom: 5rem;
+
+    background-color: rgb(60, 119, 238);
+    color: white;
 }
 
 .update-form-submit {
     margin-top: 2rem;
+    background-color: rgb(60, 119, 238);
+    color: white;
 }
 
 .update-form-button-container {
@@ -365,6 +407,8 @@ button {
 
 .delete-recipe-submit {
     margin-left: 50vw;
+    background-color: orangered;
+    color: white;
 }
 
 /* ========== media queries ========== */

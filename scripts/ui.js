@@ -28,8 +28,7 @@ export const userInputError = () => {
     messageContainerBox.classList.remove('hidden')
     messageContainer.innerHTML = 
     `
-    <h3>Oops! There was an error</h3>
-    <p>All fields must be populated to submit</p>
+    <p>All fields must be filled out to submit</p>
     `
 }
 
