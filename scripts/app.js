@@ -32,6 +32,7 @@ const navBar = document.querySelector('nav')
 const logInForm = document.querySelector('#log-in')
 const closeMessageContainerSpan = document.querySelector('.close-message-container')
 const messageContainerBox = document.querySelector('.message-container-box')
+const emptyRecipeContainer = document.querySelector('.empty-recipe-container')
 
 
 
@@ -298,6 +299,7 @@ const clearContent = () => {
     showContainer.innerHTML = ''
     updateRecipeForm.innerHTML = ''
     addNewRecipeForm.innerHTML = ''
+    emptyRecipeContainer.innerHTML = ''
 }
 
 homeButton.addEventListener('click', () => {

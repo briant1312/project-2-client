@@ -5,6 +5,7 @@ const showContainer = document.querySelector('.show-container')
 const updateRecipeForm = document.querySelector('#update-recipe')
 const addNewRecipeForm = document.querySelector('#add-recipe')
 const messageContainerBox = document.querySelector('.message-container-box')
+const emptyRecipeContainer = document.querySelector('.empty-recipe-container')
 
 export const onFailure = (err) => {
     messageContainerBox.classList.remove('hidden')
@@ -48,16 +49,23 @@ export const onCreateAccountSuccess = (userData) => {
 }
 
 export const onIndexSuccess = (recipes) => {
-    recipes.forEach(recipe => {
+    if(recipes.length > 0) {
+        recipes.forEach(recipe => {
+            const div = document.createElement('div')
+            div.innerHTML =
+             `
+            <h2>${recipe.name}</h2>
+            `
+            div.classList.add('recipe-overview')
+            div.setAttribute('data-id', recipe._id)
+            indexContainer.appendChild(div)
+        })
+    } else {
         const div = document.createElement('div')
-        div.innerHTML =
-         `
-        <h2>${recipe.name}</h2>
-        `
-        div.classList.add('recipe-overview')
-        div.setAttribute('data-id', recipe._id)
-        indexContainer.appendChild(div)
-    })
+        div.innerHTML = "<h2>It looks like you don't have any recipes yet.</h2>" +
+                        "<h2>Click the link above to start adding recipes now.</h2>"
+        emptyRecipeContainer.appendChild(div)
+    }
 }
 
 export const onShowSuccess = (recipe) => {
@@ -112,7 +120,7 @@ export const createEditForm = (id) => {
     `
     <label>Name:</label>
     <input class="update-form-name" type="text" value="${name.innerText}">
-    <label>Description</label>
+    <label>Description:</label>
     <input class="update-form-description" type="text" value="${description.innerText}">
     <label>Time(in minutes):</label>
     <input class="update-form-time" type="number" value="${time.innerText}">
@@ -160,7 +168,7 @@ export const craeteAddRecipeForm = () => {
     `
     <label>Name:</label>
     <input class="add-recipe-form-name" type="text">
-    <label>Description</label>
+    <label>Description:</label>
     <input class="add-recipe-form-description" type="text">
     <label>Time(in minutes):</label>
     <input class="add-recipe-form-time" type="number">

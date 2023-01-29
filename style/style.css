@@ -15,7 +15,11 @@ html {
 
 /* ========== global variables ========== */
 :root {
-    --font-size-small: 1.6rem;
+    --font-size-small: 1.4rem; 
+    --font-size-md: 1.6rem;
+    --color-primary: #FF6E31;
+    --color-secondary: #243763;
+
 }
 
 /* ========== utility classes ========== */
@@ -28,7 +32,7 @@ html {
 
 nav {
     height: 5rem;
-    background-color: #FF6E31;
+    background-color: var(--color-primary);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -41,8 +45,8 @@ nav {
 
 
 nav a {
-    font-size: var(--font-size-small);
-    color: #243763;
+    font-size: var(--font-size-md);
+    color: var(--color-secondary);
     font-weight: 700;
     text-shadow: 0 0 4px white;
 }
@@ -52,14 +56,15 @@ nav a {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 4.5rem;
     text-align: center;
     margin-top: 8rem;
-    font-weight: 400;
+    font-weight: 700;
+    color: var(--color-secondary);
 }
 
 body {
-    background-color: rgb(222, 222, 222);
+    background-color: rgb(233, 233, 233);
 }
 
 button {
@@ -67,7 +72,7 @@ button {
 }
 
 .message-container-box {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     color: rgba(255, 0, 0, .8);
     position: fixed;
     top: 25%;
@@ -93,10 +98,18 @@ button {
     color: rgb(0, 221, 255);
 }
 
+.empty-recipe-container {
+    width: fit-content;
+    margin: 5rem auto;
+    color: grey;
+    font-size: 1rem;
+    padding-inline: 2rem;
+}
+
 /* ========== login screen ========== */
 
 #log-in {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     border: 1px solid black;
     border-radius: 5px;
     max-width: 80%;
@@ -112,7 +125,7 @@ button {
 }
 
 #log-in h2 {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     font-weight: 300;
 }
 
@@ -121,7 +134,7 @@ button {
 }
 
 .input-container > * {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     width: 100%;
     margin-bottom: 2rem;
     padding: .7rem;
@@ -132,7 +145,7 @@ button {
     position: absolute;
     padding: .5rem 2rem;
     border-radius: 10px;
-    font-size: 1.4rem;
+    font-size: var(--font-size-small);
     cursor: pointer;
 }
 
@@ -154,7 +167,7 @@ button {
     margin-top: 4rem;
     display: grid;
     grid-template-rows: 1fr;
-    gap: 2rem;
+    gap: 1rem;
     align-content: center;
 }
 
@@ -170,7 +183,19 @@ button {
     text-transform: uppercase;
     text-align: center;
     cursor: pointer;
+    color: #181D31;
+    padding: .8rem;
+    
+    background-image: linear-gradient(90deg, transparent 0%, transparent 50%, var(--color-primary) 50%);
+    background-size: 225%;
+    transition: all .4s;
 }
+
+.recipe-overview h2:hover {
+    background-position: 100%;
+    transform: translateX(1rem);
+}
+
 
 /* ========== show screen ========== */
 
@@ -182,7 +207,7 @@ button {
 }
 
 .show-container .description {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     text-align: center;
     color: rgb(70, 70, 70);
     margin-bottom: 2rem;
@@ -199,7 +224,7 @@ button {
 }
 
 .show-container h3 {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     margin: 2rem 4rem;
 }
 
@@ -215,7 +240,7 @@ button {
 }
 
 .show-container li {
-    font-size: 1.4rem;
+    font-size: var(--font-size-small);
     line-height: 1.5;
     margin-bottom: 1rem;
 }
@@ -229,9 +254,9 @@ button {
     padding: .5rem 2rem;
     border-radius: 10px;
     border: none;
-    background-color: rgb(194, 165, 96);
+    background-color: var(--color-primary);
     margin-bottom: 5rem;
-    font-size: 1.4rem;
+    font-size: var(--font-size-small);
 }
 
 /* ========== form styles ========== */
@@ -247,7 +272,7 @@ button {
 
 #add-recipe input,
 #update-recipe input {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     line-height: 1.5;
 }
 
@@ -258,7 +283,7 @@ button {
 
 #add-recipe h3,
 #update-recipe h3 {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-md);
     margin: 1rem;
 }
 
@@ -272,7 +297,7 @@ button {
     width: fit-content;
     padding: .2rem .5rem; 
     border-radius: 5px;
-    font-size: 1.4rem;
+    font-size: var(--font-size-small);
 }
 
 .add-recipe-form-add-ingredient,
@@ -290,14 +315,14 @@ button {
 #add-recipe .add-recipe-form-ingredients input,
 #update-recipe .update-form-ingredients input {
     width: 5rem;
-    font-size: 1.4rem;
+    font-size: var(--font-size-small);
     line-height: 1;
 }
 
 .add-recipe-form-ingredients button,
 .update-form-ingredients button {
     margin-left: 3rem;
-    font-size: 1.6rem;
+    font-size: var(--font-size-md);
 }
 
 .add-recipe-form-add-step,
@@ -308,7 +333,7 @@ button {
 .add-recipe-form-steps button,
 .update-form-steps button {
     margin-left: 3rem;
-    font-size: 1.6rem;
+    font-size: var(--font-size-md);
     position: absolute;
 }
 
@@ -322,7 +347,7 @@ button {
     width: 80%;
     height: 8rem;
     padding: .5rem;
-    font-size: 1.4rem;
+    font-size: var(--font-size-small);
 }
 
 .add-recipe-form-submit {
@@ -382,6 +407,13 @@ button {
         width: 70%;
     }
 
+    .add-recipe-form-name,
+    .add-recipe-form-description,
+    .update-form-name,
+    .update-form-description {
+        width: 70%;
+    }
+
     #add-recipe .add-recipe-form-ingredients input,
     #update-recipe .update-form-ingredients input {
         width: 15rem;
@@ -397,6 +429,11 @@ button {
         margin-inline: 4rem;
     }
 
+    #update-recipe,
+    #add-recipe {
+        margin-left: 15rem;
+    }
+
     #log-in {
         max-width: 40%;
     }
@@ -409,5 +446,12 @@ button {
 
     #sign-up {
         right: 10rem;
+    }
+
+    .add-recipe-form-name,
+    .add-recipe-form-description,
+    .update-form-name,
+    .update-form-description {
+        width: 60%;
     }
 }
