@@ -40,7 +40,8 @@ signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
     const userNameInput = document.querySelector('#userName')
     const passwordInput = document.querySelector('#password')
-    if(!userName || !password) {
+    if(!userNameInput.value || !passwordInput.value) {
+        userInputError()
         return
     }
     const userData = {
@@ -63,7 +64,8 @@ signInButton.addEventListener('click', (e) => {
     e.preventDefault()
     const userNameInput = document.querySelector('#userName')
     const passwordInput = document.querySelector('#password')
-    if(!userName || !password) {
+    if(!userNameInput.value || !passwordInput.value) {
+        userInputError()
         return
     }
     const userData = {
