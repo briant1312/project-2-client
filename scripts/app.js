@@ -186,12 +186,13 @@ const createUpdateFormEventListener = () => {
             return
         }
         clearContent()
-        updateRecipe(updatedRecipe, submitButton.getAttribute('data-id'))
+        const recipeId = submitButton.getAttribute('data-id')
+        updateRecipe(updatedRecipe, recipeId)
             .then(res => checkResponseStatusCode(res))
-            .then(() => indexRecipes())
+            .then(() => showRecipe(recipeId))
             .then(res => res.json())
-            .then(responseObject => onIndexSuccess(responseObject.recipes))
-            .then(() => createIndexEventListeners())
+            .then(recipe => onShowSuccess(recipe.recipe))
+            .then(() => createEditButtonEventListener(recipeId))
             .catch(err => onFailure(err))
     })
 }
