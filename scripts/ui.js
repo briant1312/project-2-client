@@ -33,6 +33,7 @@ export const userInputError = () => {
 }
 
 export const onLoginSuccess = (responseData) => {
+    document.querySelector('h1').innerText = 'Your Recipes'
     messageContainer.innerHTML = ''
     window.localStorage.setItem('token', responseData.token)
     logInForm.classList.add('hidden')
@@ -200,4 +201,29 @@ export const craeteAddRecipeForm = () => {
     <button class="add-recipe-form-delete-step">&times;</button>
     `
     document.querySelector('.add-recipe-form-steps').appendChild(stepDiv)
+}
+
+export const createNewIngredientRow = (formBaseName) => {
+    const div = document.createElement('div')
+    div.innerHTML = 
+        `
+        <label for="${formBaseName}-form-qty">qty</label>
+        <input type="number" step="0.1" id="${formBaseName}-form-qty">
+        <label for="${formBaseName}-form-unit">unit</label>
+        <input type="text" id="${formBaseName}-form-unit">
+        <label for="${formBaseName}-form-name">name</label>
+        <input type="text" id="${formBaseName}-form-name">
+        <button class="${formBaseName}-form-delete-ingredient">&times;</button>
+        `
+        document.querySelector(`.${formBaseName}-form-ingredients`).appendChild(div)
+}
+
+export const createNewStepRow = (formBaseName) => {
+    const div = document.createElement('div')
+        div.innerHTML = 
+        `
+        <textarea></textarea>
+        <button class="${formBaseName}-form-delete-step">&times;</button>
+        `
+        document.querySelector(`.${formBaseName}-form-steps`).appendChild(div)
 }

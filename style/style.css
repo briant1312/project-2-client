@@ -18,7 +18,8 @@ html {
     --font-size-small: 1.4rem; 
     --font-size-md: 1.6rem;
     --color-primary: #FF6E31;
-    --color-secondary: #243763;
+    --color-secondary: #041c3e;
+
 
 }
 
@@ -53,7 +54,7 @@ nav a {
     font-size: var(--font-size-md);
     color: var(--color-secondary);
     font-weight: 700;
-    text-shadow: 0 0 4px white;
+    text-shadow: 0 0 3px white;
 }
 
 .logout {

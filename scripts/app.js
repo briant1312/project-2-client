@@ -15,7 +15,9 @@ import {
     createEditForm,
     craeteAddRecipeForm,
     onFailure,
-    userInputError
+    userInputError,
+    createNewIngredientRow,
+    createNewStepRow
 } from './ui.js'
 
 const signUpButton = document.querySelector('#sign-up')
@@ -33,8 +35,6 @@ const logInForm = document.querySelector('#log-in')
 const closeMessageContainerSpan = document.querySelector('.close-message-container')
 const messageContainerBox = document.querySelector('.message-container-box')
 const emptyRecipeContainer = document.querySelector('.empty-recipe-container')
-
-
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -147,18 +147,7 @@ const createAddIngredientEventListener = (formBaseName) => {
     const addIngredientButton = document.querySelector(`.${formBaseName}-form-add-ingredient`)
     addIngredientButton.addEventListener('click', (e) => {
         e.preventDefault()
-        const div = document.createElement('div')
-        div.innerHTML = 
-        `
-        <label for="${formBaseName}-form-qty">qty</label>
-        <input type="number" step="0.1" id="${formBaseName}-form-qty">
-        <label for="${formBaseName}-form-unit">unit</label>
-        <input type="text" id="${formBaseName}-form-unit">
-        <label for="${formBaseName}-form-name">name</label>
-        <input type="text" id="${formBaseName}-form-name">
-        <button class="${formBaseName}-form-delete-ingredient">&times;</button>
-        `
-        document.querySelector(`.${formBaseName}-form-ingredients`).appendChild(div)
+        createNewIngredientRow(formBaseName)
         createDeleteIngredientEventListener(formBaseName)
     })
 }
@@ -167,13 +156,7 @@ const createAddStepEventListener = (formBaseName) => {
     const addStepButton = document.querySelector(`.${formBaseName}-form-add-step`)
     addStepButton.addEventListener('click', (e) => {
         e.preventDefault()
-        const div = document.createElement('div')
-        div.innerHTML = 
-        `
-        <textarea></textarea>
-        <button class="${formBaseName}-form-delete-step">&times;</button>
-        `
-        document.querySelector(`.${formBaseName}-form-steps`).appendChild(div)
+        createNewStepRow(formBaseName)
         createDeleteStepEventListener(formBaseName)
     })
 }
@@ -316,6 +299,7 @@ homeButton.addEventListener('click', () => {
 
 logoutButton.addEventListener('click', () => {
     clearContent()
+    document.querySelector('h1').innerText = 'Recipe Tracker'
     window.localStorage.clear()
     navBar.classList.add('hidden')
     logInForm.classList.remove('hidden')
