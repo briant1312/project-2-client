@@ -17,15 +17,13 @@ import {
     onFailure,
     userInputError,
     createNewIngredientRow,
-    createNewStepRow
+    createNewStepRow,
+    clearContent
 } from './ui.js'
 
 const signUpButton = document.querySelector('#sign-up')
 const signInButton = document.querySelector('#sign-in')
 const indexContainer = document.querySelector('.index-container')
-const showContainer = document.querySelector('.show-container')
-const updateRecipeForm = document.querySelector('#update-recipe')
-const addNewRecipeForm = document.querySelector('#add-recipe')
 const homeButton = document.querySelector('.home-button')
 const addNewRecipe = document.querySelector('.add-new-recipe')
 const messageContainer = document.querySelector('.message-container')
@@ -34,7 +32,6 @@ const navBar = document.querySelector('nav')
 const logInForm = document.querySelector('#log-in')
 const closeMessageContainerSpan = document.querySelector('.close-message-container')
 const messageContainerBox = document.querySelector('.message-container-box')
-const emptyRecipeContainer = document.querySelector('.empty-recipe-container')
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -277,16 +274,6 @@ addNewRecipe.addEventListener('click', () => {
     createAddStepEventListener('add-recipe')
     createAddNewFormEventListener()
 })
-
-const clearContent = () => {
-    messageContainerBox.classList.add('hidden')
-    messageContainer.innerHTML = ''
-    indexContainer.innerHTML = ''
-    showContainer.innerHTML = ''
-    updateRecipeForm.innerHTML = ''
-    addNewRecipeForm.innerHTML = ''
-    emptyRecipeContainer.innerHTML = ''
-}
 
 homeButton.addEventListener('click', () => {
     clearContent()

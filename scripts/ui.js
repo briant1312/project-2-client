@@ -227,3 +227,13 @@ export const createNewStepRow = (formBaseName) => {
         `
         document.querySelector(`.${formBaseName}-form-steps`).appendChild(div)
 }
+
+export const clearContent = () => {
+    messageContainerBox.classList.add('hidden')
+    messageContainer.innerHTML = ''
+    indexContainer.innerHTML = ''
+    showContainer.innerHTML = ''
+    updateRecipeForm.innerHTML = ''
+    addNewRecipeForm.innerHTML = ''
+    emptyRecipeContainer.innerHTML = ''
+}

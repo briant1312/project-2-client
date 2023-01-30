@@ -206,7 +206,7 @@ input[type=submit]:active {
     cursor: pointer;
     color: #181D31;
     padding: .8rem;
-    transition: all .4s;
+    transition: all .3s;
 }
 
 .recipe-overview h2:hover {
