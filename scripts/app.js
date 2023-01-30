@@ -7,6 +7,7 @@ import {
     updateRecipe,
     deleteRecipe,
 } from './api.js'
+
 import {
     onLoginSuccess,
     onIndexSuccess,
@@ -52,7 +53,7 @@ signUpButton.addEventListener('click', (e) => {
     passwordInput.value = ''
     clearContent()
     signUp(userData)
-        .then(res => checkResponseStatusCode(res))
+        .then(checkResponseStatusCode)
         .then(res => res.json())
         .then(onCreateAccountSuccess)
         .catch(onFailure)
@@ -76,7 +77,7 @@ signInButton.addEventListener('click', (e) => {
     passwordInput.value = ''
     clearContent()
     logIn(userData)
-        .then(res => checkResponseStatusCode(res))
+        .then(checkResponseStatusCode)
         .then(res => res.json())
         .then(token => {
             onLoginSuccess(token)
@@ -171,12 +172,12 @@ const createUpdateFormEventListener = () => {
         clearContent()
         const recipeId = submitButton.getAttribute('data-id')
         updateRecipe(updatedRecipe, recipeId)
-            .then(res => checkResponseStatusCode(res))
+            .then(checkResponseStatusCode)
             .then(() => showRecipe(recipeId))
             .then(res => res.json())
             .then(recipe => onShowSuccess(recipe.recipe))
             .then(() => createEditButtonEventListener(recipeId))
-            .catch(err => onFailure(err))
+            .catch(onFailure)
     })
 }
 
@@ -189,12 +190,12 @@ const createDeleteFormEventListener = () => {
         deletePromptButton.addEventListener('click', () => {
             clearContent()
             deleteRecipe(deleteButton.getAttribute('data-id'))
-                .then(res => checkResponseStatusCode(res))
+                .then(checkResponseStatusCode)
                 .then(() => indexRecipes())
                 .then(res => res.json())
                 .then(responseObject => onIndexSuccess(responseObject.recipes))
                 .then(() => createIndexEventListeners())
-                .catch(err => onFailure(err))
+                .catch(onFailure)
         })
     })
 }
@@ -210,12 +211,12 @@ const createAddNewFormEventListener = () => {
         }
         clearContent()
         createRecipe(newRecipe, submitButton.getAttribute('data-id'))
-            .then(res => checkResponseStatusCode(res))
+            .then(checkResponseStatusCode)
             .then(() => indexRecipes())
             .then(res => res.json())
             .then(responseObject => onIndexSuccess(responseObject.recipes))
             .then(() => createIndexEventListeners())
-            .catch(err => onFailure(err))
+            .catch(onFailure)
     })
 }
 

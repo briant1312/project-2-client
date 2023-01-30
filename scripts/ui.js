@@ -52,8 +52,8 @@ export const onCreateAccountSuccess = (userData) => {
     messageContainerBox.classList.remove('hidden')
     messageContainer.innerHTML = 
     `
-    <h3 class='success-message'>Username ${userData.userName} has been created successfully </h3>
-    <p class='success-message'>Please login with your credentials</p>
+    <h3 class="success-message">Username ${userData.userName} has been created successfully </h3>
+    <p class="success-message">Please login with your credentials</p>
     `
 }
 
@@ -99,7 +99,7 @@ export const onShowSuccess = (recipe) => {
     `
     <h2 class="recipe-name">${recipe.name}</h2>
     <p class="description">${recipe.description}</p>
-    <p>Time: <span class='recipe-time'>${recipe.time}</span> Minutes</p>
+    <p>Time: <span class="recipe-time">${recipe.time}</span> Minutes</p>
     `
     const ingredientsHeader = document.createElement('h3')
     ingredientsHeader.innerText = 'Ingredients'
@@ -216,11 +216,11 @@ export const createNewIngredientRow = (formBaseName) => {
     const div = document.createElement('div')
     div.innerHTML = 
         `
-        <label for="${formBaseName}-form-qty">qty</label>
+        <label>qty</label>
         <input type="number" step="0.1" id="${formBaseName}-form-qty">
-        <label for="${formBaseName}-form-unit">unit</label>
+        <label>unit</label>
         <input type="text" id="${formBaseName}-form-unit">
-        <label for="${formBaseName}-form-name">name</label>
+        <label>name</label>
         <input type="text" id="${formBaseName}-form-name">
         <button class="${formBaseName}-form-delete-ingredient">&times;</button>
         `

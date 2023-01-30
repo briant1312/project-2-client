@@ -1,5 +1,7 @@
+const baseUrl = 'http://localhost:3000'
+
 export const signUp = (data) => {
-    return fetch('http://localhost:3000/sign-up', {
+    return fetch(`${baseUrl}/sign-up`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -10,7 +12,7 @@ export const signUp = (data) => {
 }
 
 export const logIn = (data) => {
-    return fetch('http://localhost:3000/sign-in', {
+    return fetch(`${baseUrl}/sign-in`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -21,12 +23,12 @@ export const logIn = (data) => {
 }
 
 export const createRecipe = (data) => {
-    return fetch('http://localhost:3000/recipes', {
+    return fetch(`${baseUrl}/recipes`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+            'Authorization': `Bearer ${window.localStorage.token}`
         },
         body: JSON.stringify(data)
     })
@@ -34,13 +36,13 @@ export const createRecipe = (data) => {
 
 export const indexRecipes = (token = null) => {
     if(!token) {
-        return fetch('http://localhost:3000/recipes', {
+        return fetch(`${baseUrl}/recipes`, {
         headers: {
             'Authorization': `Bearer ${window.localStorage.token}`
         }
     })
     } else {
-        return fetch('http://localhost:3000/recipes', {
+        return fetch(`${baseUrl}/recipes`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -49,7 +51,7 @@ export const indexRecipes = (token = null) => {
 }
 
 export const showRecipe = (recipeId) => {
-    return fetch(`http://localhost:3000/recipes/${recipeId}`, {
+    return fetch(`${baseUrl}/recipes/${recipeId}`, {
         headers: {
             'Authorization': `Bearer ${window.localStorage.token}`
         }
@@ -57,7 +59,7 @@ export const showRecipe = (recipeId) => {
 } 
 
 export const updateRecipe = (data, recipeId) => {
-    return fetch(`http://localhost:3000/recipes/${recipeId}`, {
+    return fetch(`${baseUrl}/recipes/${recipeId}`, {
         method: 'PATCH',
         headers: {
             'Accept': 'application/json',
@@ -69,7 +71,7 @@ export const updateRecipe = (data, recipeId) => {
 }
 
 export const deleteRecipe = (recipeId) => {
-    return fetch(`http://localhost:3000/recipes/${recipeId}`, {
+    return fetch(`${baseUrl}/recipes/${recipeId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${window.localStorage.token}`
