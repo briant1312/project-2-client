@@ -58,6 +58,8 @@ export const onCreateAccountSuccess = (userData) => {
 }
 
 export const onIndexSuccess = (recipes) => {
+    // if the user has recipes saved loop through and display all of them 
+    // on the index screen
     if(recipes.length > 0) {
         recipes.forEach(recipe => {
             const div = document.createElement('div')
@@ -69,6 +71,8 @@ export const onIndexSuccess = (recipes) => {
             div.setAttribute('data-id', recipe._id)
             indexContainer.appendChild(div)
         })
+        // if the user has no recipes saved display a message letting them know
+        // how to start adding recipes
     } else {
         const div = document.createElement('div')
         div.innerHTML = "<h2>It looks like you don't have any recipes yet.</h2>" +
@@ -78,15 +82,18 @@ export const onIndexSuccess = (recipes) => {
 }
 
 export const onShowSuccess = (recipe) => {
-    showContainer.innerHTML = ''
     showContainer.classList.remove('hidden')
     const div = document.createElement('div')
+    // create an ordered list to hold all of the steps then loop through and 
+    // add all of the steps to the ordered lis
     const stepsOl = document.createElement('ol')
     recipe.steps.forEach(step => {
         const li = document.createElement('li')
         li.innerText = step
         stepsOl.appendChild(li)
     })
+    // create an unordered list to hold all of the ingredients then loop through
+    // and add all the ingredients to the unordered list
     const ingredientsUl = document.createElement('ul')
     recipe.ingredients.forEach(ingredient => {
         const li = document.createElement('li')
@@ -95,12 +102,16 @@ export const onShowSuccess = (recipe) => {
                         <span class="ingredient-name">${ingredient.name}</span>`
         ingredientsUl.appendChild(li)
     })
+    // create a div to contain the recipe fields and add the name, class and time
     div.innerHTML = 
     `
     <h2 class="recipe-name">${recipe.name}</h2>
     <p class="description">${recipe.description}</p>
     <p>Time: <span class="recipe-time">${recipe.time}</span> Minutes</p>
     `
+
+    // create a header for the ingredients and steps, then add those plus the OL and UL to the 
+    // above div 
     const ingredientsHeader = document.createElement('h3')
     ingredientsHeader.innerText = 'Ingredients'
     const stepsHeader = document.createElement('h3')
@@ -119,6 +130,7 @@ export const onShowSuccess = (recipe) => {
 }
 
 export const createEditForm = (id) => {
+    // grab all of the info from the show page so it can be used to auto populate the update form
     const name = document.querySelector('.show-container h2')
     const description = document.querySelector('.description')
     const time = document.querySelector('.recipe-time')
@@ -145,6 +157,7 @@ export const createEditForm = (id) => {
     </div>
     `
 
+    // create a row in the form for each of the ingredients
     ingredients.forEach(ingredient => {
         const div = document.createElement('div')
         div.innerHTML = 
@@ -160,6 +173,7 @@ export const createEditForm = (id) => {
         document.querySelector('.update-form-ingredients').appendChild(div)
     })
 
+    // create a row in the form for each of the steps
     steps.forEach(step => {
         const div = document.createElement('div')
         div.innerHTML = 

@@ -34,21 +34,12 @@ const navBar = document.querySelector('nav')
 const logInForm = document.querySelector('#log-in')
 const closeMessageContainerSpan = document.querySelector('.close-message-container')
 const messageContainerBox = document.querySelector('.message-container-box')
+const userNameInput = document.querySelector('#userName')
+const passwordInput = document.querySelector('#password')
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
-    const userNameInput = document.querySelector('#userName')
-    const passwordInput = document.querySelector('#password')
-    if(!userNameInput.value || !passwordInput.value) {
-        userInputError()
-        return
-    }
-    const userData = {
-        credentials: {
-            userName: userNameInput.value,
-            password: passwordInput.value
-        }
-    }
+    const userData = createUserObject()
     userNameInput.value = ''
     passwordInput.value = ''
     clearContent()
@@ -61,18 +52,7 @@ signUpButton.addEventListener('click', (e) => {
 
 signInButton.addEventListener('click', (e) => {
     e.preventDefault()
-    const userNameInput = document.querySelector('#userName')
-    const passwordInput = document.querySelector('#password')
-    if(!userNameInput.value || !passwordInput.value) {
-        userInputError()
-        return
-    }
-    const userData = {
-        credentials: {
-            userName: userNameInput.value,
-            password: passwordInput.value
-        }
-    }
+    const userData = createUserObject()
     userNameInput.value = ''
     passwordInput.value = ''
     clearContent()
@@ -93,9 +73,27 @@ signInButton.addEventListener('click', (e) => {
         .catch(onFailure)
 })
 
+const createUserObject = () => {
+    // prevent the user from submitting the form if both fields aren't filled out to prevent
+    // unnecessary calls to the api
+    if(!userNameInput.value || !passwordInput.value) {
+        userInputError()
+        return
+    }
+    // create the user object to send to the api
+    const userData = {
+        credentials: {
+            userName: userNameInput.value,
+            password: passwordInput.value
+        }
+    }
+    return userData
+}
+
 const createIndexEventListeners = () => {
     const recipes = document.querySelectorAll('.recipe-overview')
     recipes.forEach(recipe => {
+        // create event listeners for all of the indexed recipes for the show route
         recipe.addEventListener('click', () => {
             const id = recipe.getAttribute('data-id')
             indexContainer.innerHTML = ''
@@ -112,6 +110,8 @@ const createEditButtonEventListener = (id) => {
     const editButton = document.querySelector('.edit-recipe')
     editButton.setAttribute('data-id', id)
     editButton.addEventListener('click', () => {
+        // create the edit form once the user has clicked the edit button on the show page
+        // and create the event listeners for all of the buttons in the form
         createEditForm(editButton.getAttribute('data-id'))
         createDeleteIngredientEventListener('update')
         createDeleteStepEventListener('update')
@@ -164,7 +164,10 @@ const createUpdateFormEventListener = () => {
     const submitButton = document.querySelector('.update-form-submit')
     submitButton.addEventListener('click', (e) => {
         e.preventDefault()
+        // create the recipe object from the update form that will get sent to the api 
         const updatedRecipe = generateRecipeObject('update')
+        // make sure none of the fields for the recipe object are empty to avoid unneccesary 
+        // requests to the api
         if(!isRecipeObjectValid(updatedRecipe)) {
             userInputError()
             return
@@ -185,6 +188,8 @@ const createDeleteFormEventListener = () => {
     const deleteButton = document.querySelector('.delete-recipe-submit')
     deleteButton.addEventListener('click', (e) => {
         e.preventDefault()
+        // prompt the user to make sure they want to delete the recipe to prevent 
+        // accidentally presssing the delete button
         createDeleteConfirmationPrompt()
         const deletePromptButton = document.querySelector('.delete-recipe-prompt')
         deletePromptButton.addEventListener('click', () => {
@@ -204,7 +209,10 @@ const createAddNewFormEventListener = () => {
     const submitButton = document.querySelector('.add-recipe-form-submit')
     submitButton.addEventListener('click', (e) => {
         e.preventDefault()
+        // create the recipe object from the add new recipe form that will get sent to the api
         const newRecipe = generateRecipeObject('add-recipe')
+        // make sure none of the fields for the recipe object are empty to avoid unneccesary 
+        // requests to the api
         if(!isRecipeObjectValid(newRecipe)) {
             userInputError()
             return
@@ -220,17 +228,26 @@ const createAddNewFormEventListener = () => {
     })
 }
 
+// this function takes in the formBaseName so that it can be used to generate the recipe object
+// for both the add and update forms
 const generateRecipeObject = (formBaseName) => {
+    // create all of the different variables that are required for the recipe model
     const name = document.querySelector(`.${formBaseName}-form-name`).value
     const description = document.querySelector(`.${formBaseName}-form-description`).value
     const time = document.querySelector(`.${formBaseName}-form-time`).value
     const stepsArray = []
     const ingredientsArray = []
+    // grabs all of the text area's from the form that contain the steps so that 
+    // it can be looped through to push them all into the stepsArray
     const steps = document.querySelectorAll(`.${formBaseName}-form-steps textarea`)
     for(let step of steps) {
         stepsArray.push(step.value)
     }
+    // grabs all of the ingredients input fields from the form
     const ingredients = document.querySelectorAll(`.${formBaseName}-form-ingredients input`)
+    // each ingredient model has 3 fields, the above query returns all of the input fields that pertain
+    // to the ingredients. The below loop will cycle through each and create an object for each ingredient
+    // and pushes them into the ingredientsArray
     for(let i = 0; i < ingredients.length; i += 3) {
         const ingredient = {
             qty: ingredients[i].value,
@@ -240,6 +257,7 @@ const generateRecipeObject = (formBaseName) => {
         ingredientsArray.push(ingredient)
     }
     
+    // create the recipe object from the above info to be sent to the api
     const recipe = {
         recipe: {
             name: name,
@@ -252,6 +270,8 @@ const generateRecipeObject = (formBaseName) => {
     return recipe
 }
 
+// check all of the fields in the recipe object and see if they are empty before sending the 
+// request to the api
 const isRecipeObjectValid = (recipe) => {
     for(let key in recipe.recipe) {
         if(recipe.recipe[key] === null || recipe.recipe[key] === '') {
@@ -298,6 +318,8 @@ logoutButton.addEventListener('click', () => {
     logInForm.classList.remove('hidden')
 })
 
+// very basic function to check the status code of the response from the api
+// to try and create more helpful error messages
 const checkResponseStatusCode = (res) => {
     let message
     if(res.statusText === 'Unprocessable Entity') {
