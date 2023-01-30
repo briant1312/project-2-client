@@ -328,9 +328,9 @@ logoutButton.addEventListener('click', () => {
 // to try and create more helpful error messages
 const checkResponseStatusCode = (res) => {
     let message
-    if(res.statusText === 'Unprocessable Entity') {
+    if(res.status === 422) {
         message = 'Username or password was incorrect'
-    }else if(res.statusText === 'Internal Server Error') {
+    }else if(res.status === 500) {
         message = 'There was a problem processing your request'
     } else {
         message = res.statusText
