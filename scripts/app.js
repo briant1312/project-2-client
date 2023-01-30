@@ -39,6 +39,12 @@ const passwordInput = document.querySelector('#password')
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
+    // prevent the user from submitting the form if both fields aren't filled out to prevent
+    // unnecessary calls to the api
+    if(!userNameInput.value || !passwordInput.value) {
+        userInputError()
+        return
+    }
     const userData = createUserObject()
     userNameInput.value = ''
     passwordInput.value = ''
@@ -52,6 +58,12 @@ signUpButton.addEventListener('click', (e) => {
 
 signInButton.addEventListener('click', (e) => {
     e.preventDefault()
+    // prevent the user from submitting the form if both fields aren't filled out to prevent
+    // unnecessary calls to the api
+    if(!userNameInput.value || !passwordInput.value) {
+        userInputError()
+        return
+    }
     const userData = createUserObject()
     userNameInput.value = ''
     passwordInput.value = ''
@@ -74,12 +86,6 @@ signInButton.addEventListener('click', (e) => {
 })
 
 const createUserObject = () => {
-    // prevent the user from submitting the form if both fields aren't filled out to prevent
-    // unnecessary calls to the api
-    if(!userNameInput.value || !passwordInput.value) {
-        userInputError()
-        return
-    }
     // create the user object to send to the api
     const userData = {
         credentials: {
