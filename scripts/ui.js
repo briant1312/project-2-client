@@ -25,10 +25,19 @@ export const onFailure = (err) => {
 }
 
 export const userInputError = () => {
-    messageContainerBox.classList.remove('hidden')
-    messageContainer.innerHTML = 
+        messageContainerBox.classList.remove('hidden')
+        messageContainer.innerHTML = 
     `
     <p>All fields must be filled out to submit</p>
+    `
+}
+
+export const createDeleteConfirmationPrompt = () => {
+    messageContainerBox.classList.remove('hidden')
+    messageContainer.innerHTML =
+    `
+    <p class="success-message">Are you sure you want to delete this recipe?</p>
+    <button class="delete-recipe-prompt">Delete</button>
     `
 }
 

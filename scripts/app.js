@@ -18,7 +18,8 @@ import {
     userInputError,
     createNewIngredientRow,
     createNewStepRow,
-    clearContent
+    clearContent,
+    createDeleteConfirmationPrompt
 } from './ui.js'
 
 const signUpButton = document.querySelector('#sign-up')
@@ -183,14 +184,18 @@ const createDeleteFormEventListener = () => {
     const deleteButton = document.querySelector('.delete-recipe-submit')
     deleteButton.addEventListener('click', (e) => {
         e.preventDefault()
-        clearContent()
-        deleteRecipe(deleteButton.getAttribute('data-id'))
-            .then(res => checkResponseStatusCode(res))
-            .then(() => indexRecipes())
-            .then(res => res.json())
-            .then(responseObject => onIndexSuccess(responseObject.recipes))
-            .then(() => createIndexEventListeners())
-            .catch(err => onFailure(err))
+        createDeleteConfirmationPrompt()
+        const deletePromptButton = document.querySelector('.delete-recipe-prompt')
+        deletePromptButton.addEventListener('click', () => {
+            clearContent()
+            deleteRecipe(deleteButton.getAttribute('data-id'))
+                .then(res => checkResponseStatusCode(res))
+                .then(() => indexRecipes())
+                .then(res => res.json())
+                .then(responseObject => onIndexSuccess(responseObject.recipes))
+                .then(() => createIndexEventListeners())
+                .catch(err => onFailure(err))
+        })
     })
 }
 
