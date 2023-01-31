@@ -104,7 +104,7 @@ export const onShowSuccess = (recipe) => {
     recipe.ingredients.forEach(ingredient => {
         const li = document.createElement('li')
         li.innerHTML = `<span class="ingredient-qty">${ingredient.qty}</span> 
-                        <span class="ingredient-unit">${ingredient.unit}</span> of
+                        <span class="ingredient-unit">${ingredient.unit}</span>
                         <span class="ingredient-name">${ingredient.name}</span>`
         ingredientsUl.appendChild(li)
     })
