@@ -15,9 +15,6 @@ This is a very simple recipe tracker app that allows you to store all of your fa
 - Javascript
 - HTML
 - CSS
-- NodeJS
-- Express
-- Mongoose
 
 ## Getting started
 
