@@ -1,61 +1,42 @@
 # Recipe Tracker
 
-## Wireframes
+This is a very simple recipe tracker app that allows you to store all of your favorite recipes in one place. Simply create a profile, login and start adding recipes to your collection now.
 
-Login Screen
-![alt text](./wireframes/Login.png)
-Home Page / Index
-![alt text](./wireframes/Home-Page.png)
-Show Page
-![alt text](./wireframes/Show-Recipe.png)
-Edit Page
-![alt text](./wireframes/Edit-Recipe.png)
-Create Page
-![alt text](./wireframes/Create-Recipe.png)
+![login screen](screenshots/login_screen.png)
+![home screen](screenshots/index_page.png)
+![show page](screenshots/show_page.png)
+![update page](screenshots/update_page.png)
+![create page](screenshots/create_page.png)
+
+## Techonolgies Used
 
 ---
 
-## Entity Relationship Diagram
+- Javascript
+- HTML
+- CSS
+- NodeJS
+- Express
+- Mongoose
 
-![alt text](./wireframes/ERD.png)
-
-## Recipe Model
-
-- name: String
-- description: String
-- time: Number
-- steps: \[String\]
-- ingredients: \[ingredientSchema\]
-- user: Schema.Types.ObjectId, ref: User
-
-## Ingredients Model
-
-- name: String
-- group: String
-- qty: Number
-- unit: String
-
-## User Model
-
-- userName: String, unique: true
-- password: String
-- token: String
+## Getting started
 
 ---
 
-## MVP
+Click the link [here](tbd) to start using the app
 
-- As a user, I want to be able to create an account
-- As a user, I want to be able to log in
-- As a user, I want to be able to log out
-- As a user, I want to be able to delete my account
-- As a user, I want to see all of my recipes once logged in
-- As a user, I want to be able to create a recipe
-- As a user, I want to be able to update a recipe
-- As a user, I want to be able to delete a recipe
-- As a user, I want to be able to view a single recipe
+Instructions: 
 
-## Version 2
+- create a profile and login
+- hit the "add new recipe" link in the nav and start adding to your collection
+- click the recipe name to view that recipe
+- click the edit button on the show page to edit or delete that recipe
+
+## Next Steps
+
+---
+
+### Version 2:
 
 - As a user, I want to be able to choose different themes for the app
 - As a user, I want to be able to rate recipes
@@ -63,7 +44,7 @@ Create Page
 - As a user, I want to be able to add a profile picture
 - As a user, I want to be able to add pictures for recipes
 
-## Version 3
+### Version 3:
 
 - As a user, I want to be able to share recipes with friends
-- As a user, I want to be able to choose a serving size and automatically adjust the recipe
+- As a user, I want to be able to be able to view and like other peoples recipes
