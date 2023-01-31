@@ -17,7 +17,10 @@ html {
 :root {
     --font-size-small: 1.4rem; 
     --font-size-md: 1.6rem;
-    --color-primary: #FF6E31;
+    --color-primary: #ff5731;
+    --color-primary-2: #e34128;
+    --color-primary-light: rgba(255, 87, 49, 0.8);
+    --color-primary-2-light: rgba(252, 34, 0, 0.8);
     --color-secondary: #041c3e;
 }
 
@@ -36,7 +39,7 @@ html {
 
 nav {
     height: 5rem;
-    background-color: var(--color-primary);
+    background: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-2-light));
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -47,6 +50,14 @@ nav {
     z-index: 10;
 }
 
+.nav-background {
+    height: 5rem;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    z-index: 9;
+}
 
 nav a {
     font-size: var(--font-size-md);
@@ -68,7 +79,12 @@ h1 {
 }
 
 body {
-    background-color: rgb(233, 233, 233);
+    background-image: linear-gradient(
+        rgba(240, 240, 240, 0.82),
+        rgba(240, 240, 240, 0.82)),
+        url('../images/brooke-lark-29h2n639YDA-unsplash.jpg');
+    background-size: 100vw;
+    background-repeat: repeat-y;
 }
 
 button,
@@ -219,7 +235,7 @@ input[type=submit]:active {
 
 .recipe-overview h2:hover {
     transform: translateY(-2px);
-    color: var(--color-primary);
+    color: var(--color-primary-2);
 }
 
 
@@ -301,6 +317,8 @@ input[type=submit]:active {
 #update-recipe input {
     font-size: var(--font-size-md);
     line-height: 1.5;
+
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
 }
 
 #add-recipe input:focus,

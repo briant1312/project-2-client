@@ -31,6 +31,7 @@ const addNewRecipe = document.querySelector('.add-new-recipe')
 const messageContainer = document.querySelector('.message-container')
 const logoutButton = document.querySelector('.logout')
 const navBar = document.querySelector('nav')
+const navBackground = document.querySelector('.nav-background')
 const logInForm = document.querySelector('#log-in')
 const closeMessageContainerSpan = document.querySelector('.close-message-container')
 const messageContainerBox = document.querySelector('.message-container-box')
@@ -81,6 +82,7 @@ signInButton.addEventListener('click', (e) => {
         .then(() => {
             createIndexEventListeners()
             navBar.classList.remove('hidden')
+            navBackground.classList.remove('hidden')
         })
         .catch(onFailure)
 })
@@ -321,6 +323,7 @@ logoutButton.addEventListener('click', () => {
     document.querySelector('h1').innerText = 'Recipe Tracker'
     window.localStorage.clear()
     navBar.classList.add('hidden')
+    navBackground.classList.add('hidden')
     logInForm.classList.remove('hidden')
 })
 
