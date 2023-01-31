@@ -6,6 +6,7 @@ import {
     showRecipe,
     updateRecipe,
     deleteRecipe,
+    indexAllRecipes
 } from './api.js'
 
 import {
@@ -37,6 +38,7 @@ const closeMessageContainerSpan = document.querySelector('.close-message-contain
 const messageContainerBox = document.querySelector('.message-container-box')
 const userNameInput = document.querySelector('#userName')
 const passwordInput = document.querySelector('#password')
+const viewAllRecipes = document.querySelector('.view-all-recipes')
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -347,4 +349,15 @@ const checkResponseStatusCode = (res) => {
 closeMessageContainerSpan.addEventListener('click', () => {
     messageContainerBox.classList.add('hidden')
     messageContainer.innerHTML = ''
+})
+
+viewAllRecipes.addEventListener('click', () => {
+    clearContent()
+    indexAllRecipes()
+        .then(checkResponseStatusCode)
+        .then(res => res.json())
+        .then(responseObject => onIndexSuccess(responseObject.recipes))
+        .then(() => createIndexEventListeners())
+        .catch(onFailure)
+
 })

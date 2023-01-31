@@ -74,7 +74,7 @@ export const onIndexSuccess = (recipes) => {
 
             setTimeout(() => {
                 h2.classList.add('slide-up-from-bottom')
-            }, 100 * i);
+            }, 50 * i);
             i++
         })
         // if the user has no recipes saved display a message letting them know

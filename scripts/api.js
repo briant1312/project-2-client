@@ -50,6 +50,14 @@ export const indexRecipes = (token = null) => {
     }
 }
 
+export const indexAllRecipes = () => {
+    return fetch(`${baseUrl}/allRecipes`, {
+        headers: {
+            'Authorization': `Bearer ${window.localStorage.token}`
+        }
+    })
+}
+
 export const showRecipe = (recipeId) => {
     return fetch(`${baseUrl}/recipes/${recipeId}`, {
         headers: {
