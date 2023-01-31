@@ -61,15 +61,21 @@ export const onIndexSuccess = (recipes) => {
     // if the user has recipes saved loop through and display all of them 
     // on the index screen
     if(recipes.length > 0) {
+        let i = 1
         recipes.forEach(recipe => {
             const div = document.createElement('div')
-            div.innerHTML =
-             `
-            <h2>${recipe.name}</h2>
-            `
+            const h2 = document.createElement('h2')
+            h2.innerText = recipe.name
+            div.appendChild(h2)
             div.classList.add('recipe-overview')
             div.setAttribute('data-id', recipe._id)
             indexContainer.appendChild(div)
+
+
+            setTimeout(() => {
+                h2.classList.add('slide-up-from-bottom')
+            }, 100 * i);
+            i++
         })
         // if the user has no recipes saved display a message letting them know
         // how to start adding recipes
