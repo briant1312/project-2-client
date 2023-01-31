@@ -169,7 +169,7 @@ export const createEditForm = (id) => {
         div.innerHTML = 
         `
         <label>qty</label>
-        <input type="number" step="0.1" value="${ingredient.childNodes[0].innerText}">
+        <input type="text" value="${ingredient.childNodes[0].innerText}">
         <label>unit</label>
         <input type="text" value="${ingredient.childNodes[2].innerText}">
         <label>name</label>
@@ -214,7 +214,7 @@ export const craeteAddRecipeForm = () => {
     ingredientDiv.innerHTML = 
         `
         <label>qty</label>
-        <input type="number" step="0.1">
+        <input type="text">
         <label>unit</label>
         <input type="text">
         <label>name</label>
@@ -237,7 +237,7 @@ export const createNewIngredientRow = (formBaseName) => {
     div.innerHTML = 
         `
         <label>qty</label>
-        <input type="number" step="0.1" id="${formBaseName}-form-qty">
+        <input type="text" id="${formBaseName}-form-qty">
         <label>unit</label>
         <input type="text" id="${formBaseName}-form-unit">
         <label>name</label>
