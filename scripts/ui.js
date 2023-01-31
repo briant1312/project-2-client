@@ -73,8 +73,8 @@ export const onIndexSuccess = (recipes) => {
 
             // add class to animate the recipes once indexed
             setTimeout(() => {
-                h2.classList.add('slide-up-from-bottom')
-            }, 100 * i);
+                h2.classList.add('slide-in-from-right')
+            }, 50 * i);
             i++
         })
         // if the user has no recipes saved display a message letting them know

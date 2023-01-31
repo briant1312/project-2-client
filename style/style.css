@@ -232,7 +232,7 @@ input[type=submit]:active {
     color: #181D31;
     padding: .8rem;
     transition: all .4s;
-    transform: translateY(10rem);
+    transform: translateX(20rem);
     opacity: 0;
 }
 
@@ -241,9 +241,9 @@ input[type=submit]:active {
     color: var(--color-primary-2);
 }
 
-h2.slide-up-from-bottom {
+h2.slide-in-from-right {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
 }
 
 /* ========== show screen ========== */
