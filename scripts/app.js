@@ -338,10 +338,7 @@ const checkResponseStatusCode = (res) => {
     } else {
         message = res.statusText
     }
-    if(res.status >= 400 && res.status < 500) {
-        throw message
-    }
-    if(res.status >= 500) {
+    if(res.status >= 400) {
         throw message
     }
     return res
