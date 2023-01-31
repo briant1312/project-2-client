@@ -20,7 +20,7 @@ This is a very simple recipe tracker app that allows you to store all of your fa
 
 ---
 
-Click the link [here](tbd) to start using the app
+Click the link [here](https://briant1312.github.io/project-2-client/) to start using the app
 
 Instructions: 
 
