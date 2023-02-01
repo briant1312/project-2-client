@@ -237,6 +237,11 @@ input[type=submit]:active {
     opacity: 0;
 }
 
+.recipe-overview p {
+    opacity: 0;
+    transition: all 2s;
+}
+
 .recipe-overview h2:hover {
     transform: translateY(-2px);
     color: var(--color-primary-2);
@@ -245,6 +250,10 @@ input[type=submit]:active {
 h2.slide-up-from-bottom {
     opacity: 1;
     transform: translateX(0);
+}
+
+p.appear {
+    opacity: 1
 }
 
 /* ========== show screen ========== */

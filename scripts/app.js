@@ -21,7 +21,8 @@ import {
     createNewIngredientRow,
     createNewStepRow,
     clearContent,
-    createDeleteConfirmationPrompt
+    createDeleteConfirmationPrompt,
+    onIndexAllSuccess
 } from './ui.js'
 
 const signUpButton = document.querySelector('#sign-up')
@@ -117,9 +118,10 @@ const createIndexEventListeners = () => {
 }
 
 const createEditButtonEventListener = (id) => {
-    const editButton = document.querySelector('.edit-recipe')
-    editButton.setAttribute('data-id', id)
-    editButton.addEventListener('click', () => {
+    try {
+        const editButton = document.querySelector('.edit-recipe')
+        editButton.setAttribute('data-id', id)
+        editButton.addEventListener('click', () => {
         // create the edit form once the user has clicked the edit button on the show page
         // and create the event listeners for all of the buttons in the form
         createEditForm(editButton.getAttribute('data-id'))
@@ -130,6 +132,9 @@ const createEditButtonEventListener = (id) => {
         createUpdateFormEventListener()
         createDeleteFormEventListener()
     })
+    } catch {
+        return
+    }
 }
 
 const createDeleteIngredientEventListener = (formBaseName) => {
@@ -356,7 +361,7 @@ viewAllRecipes.addEventListener('click', () => {
     indexAllRecipes()
         .then(checkResponseStatusCode)
         .then(res => res.json())
-        .then(responseObject => onIndexSuccess(responseObject.recipes))
+        .then(responseObject => onIndexAllSuccess(responseObject.recipes))
         .then(() => createIndexEventListeners())
         .catch(onFailure)
 
