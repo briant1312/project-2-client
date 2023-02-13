@@ -38,6 +38,8 @@ const messageContainerBox = document.querySelector('.message-container-box')
 const userNameInput = document.querySelector('#userName')
 const passwordInput = document.querySelector('#password')
 
+// you can leave more comments within this form that detail what each function / section of code is doing
+
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
     // prevent the user from submitting the form if both fields aren't filled out to prevent

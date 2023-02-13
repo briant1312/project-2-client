@@ -7,6 +7,8 @@ const addNewRecipeForm = document.querySelector('#add-recipe')
 const messageContainerBox = document.querySelector('.message-container-box')
 const emptyRecipeContainer = document.querySelector('.empty-recipe-container')
 
+// you can leave more comments within this form that detail what each function / section of code is doing
+
 export const onFailure = (err) => {
     messageContainerBox.classList.remove('hidden')
     if(err == 'TypeError: Failed to fetch') {
