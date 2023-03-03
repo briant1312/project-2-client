@@ -178,6 +178,7 @@ export const onShowSuccess = (recipe) => {
 }
 
 export const createEditForm = (id) => {
+    updateRecipeForm.classList.remove('hidden')
     // grab all of the info from the show page so it can be used to auto populate the update form
     const name = document.querySelector('.show-container h2')
     const description = document.querySelector('.description')
@@ -234,7 +235,8 @@ export const createEditForm = (id) => {
     showContainer.classList.add('hidden')
 }
 
-export const craeteAddRecipeForm = () => {
+export const createAddRecipeForm = () => {
+    addNewRecipeForm.classList.remove('hidden')
     addNewRecipeForm.innerHTML = 
     `
     <label>Name:</label>
@@ -301,6 +303,8 @@ export const createNewStepRow = (formBaseName) => {
 
 export const clearContent = () => {
     messageContainerBox.classList.add('hidden')
+    addNewRecipeForm.classList.add('hidden')
+    updateRecipeForm.classList.add('hidden')
     messageContainer.innerHTML = ''
     indexContainer.innerHTML = ''
     showContainer.innerHTML = ''

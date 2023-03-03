@@ -15,7 +15,7 @@ import {
     onCreateAccountSuccess,
     onShowSuccess,
     createEditForm,
-    craeteAddRecipeForm,
+    createAddRecipeForm,
     onFailure,
     userInputError,
     createNewIngredientRow,
@@ -308,7 +308,7 @@ const isRecipeObjectValid = (recipe) => {
 
 addNewRecipe.addEventListener('click', () => {
     clearContent()
-    craeteAddRecipeForm()
+    createAddRecipeForm()
     createDeleteIngredientEventListener('add-recipe')
     createDeleteStepEventListener('add-recipe')
     createAddIngredientEventListener('add-recipe')

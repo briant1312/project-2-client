@@ -328,14 +328,20 @@ p.appear {
     flex-direction: column;
     margin: 0 auto;
     gap: 1rem;
+
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: rgba(125, 156, 175, .9);
 }
 
 #add-recipe input,
-#update-recipe input {
+#update-recipe input,
+#add-recipe textarea,
+#update-recipe textarea {
     font-size: var(--font-size-md);
     line-height: 1.5;
-
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+    border-radius: 5px;
+    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, .4); */
 }
 
 #add-recipe input:focus,
@@ -393,7 +399,7 @@ p.appear {
 
 .add-recipe-form-ingredients button,
 .update-form-ingredients button {
-    margin-left: 3rem;
+    margin-left: 1rem;
     font-size: var(--font-size-md);
 
     background-color: orangered;
