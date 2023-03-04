@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://glacial-plains-23237.herokuapp.com'
+// const baseUrl = 'http://localhost:3000'
 
 export const signUp = (data) => {
     return fetch(`${baseUrl}/sign-up`, {
