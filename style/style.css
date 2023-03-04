@@ -76,7 +76,8 @@ h1 {
     margin-top: 8rem;
     font-weight: 700;
     color: var(--color-secondary);
-    text-shadow: 2px 2px 4px var(--color-primary-2);
+    /* text-shadow: 2px 2px 4px var(--color-primary-2); */
+    -webkit-text-stroke: 2px var(--color-primary-2);
 }
 
 body {
@@ -331,7 +332,8 @@ p.appear {
 
     border-radius: 10px;
     padding: 2rem;
-    background-color: rgba(125, 156, 175, .9);
+    background-color: rgb(116, 160, 190);
+    margin-bottom: 5rem;
 }
 
 #add-recipe input,
@@ -341,7 +343,6 @@ p.appear {
     font-size: var(--font-size-md);
     line-height: 1.5;
     border-radius: 5px;
-    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, .4); */
 }
 
 #add-recipe input:focus,
@@ -534,7 +535,7 @@ p.appear {
 
     #update-recipe,
     #add-recipe {
-        margin-left: 15rem;
+        padding-left: 5rem;
     }
 
     #log-in {
