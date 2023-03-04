@@ -58,9 +58,11 @@ export const onCreateAccountSuccess = (userData) => {
 }
 
 export const onIndexSuccess = (recipes) => {
+    document.querySelector('h1').innerText = 'Your Recipes'
     // if the user has recipes saved loop through and display all of them 
     // on the index screen
     if(recipes.length > 0) {
+        window.localStorage.setItem('user', recipes[0].user._id)
         let i = 1
         recipes.forEach(recipe => {
             const div = document.createElement('div')
@@ -71,10 +73,48 @@ export const onIndexSuccess = (recipes) => {
             div.setAttribute('data-id', recipe._id)
             indexContainer.appendChild(div)
 
-            // add class to animate the recipes once indexed
+
             setTimeout(() => {
-                h2.classList.add('slide-in-from-right')
+                h2.classList.add('slide-up-from-bottom')
             }, 50 * i);
+            i++
+        })
+        // if the user has no recipes saved display a message letting them know
+        // how to start adding recipes
+    } else {
+        const div = document.createElement('div')
+        div.innerHTML = "<h2>It looks like you don't have any recipes yet.</h2>" +
+                        "<h2>Click the link above to start adding recipes now.</h2>"
+        emptyRecipeContainer.appendChild(div)
+    }
+}
+
+export const onIndexAllSuccess = (recipes) => {
+    document.querySelector('h1').innerText = 'All Recipes'
+    // if the user has recipes saved loop through and display all of them 
+    // on the index screen
+    if(recipes.length > 0) {
+        let i = 1
+        recipes.forEach(recipe => {
+            const div = document.createElement('div')
+            const h2 = document.createElement('h2')
+            const p = document.createElement('p')
+            p.innerText = `submitted by: ${recipe.user.userName}`
+            h2.innerText = recipe.name
+            div.appendChild(h2)
+            div.appendChild(p)
+            div.classList.add('recipe-overview')
+            div.setAttribute('data-id', recipe._id)
+            indexContainer.appendChild(div)
+
+
+            setTimeout(() => {
+                h2.classList.add('slide-up-from-bottom')
+            }, 50 * i)
+            
+            setTimeout(() => {
+                p.classList.add('appear')
+            }, 60 * i);
             i++
         })
         // if the user has no recipes saved display a message letting them know
@@ -128,14 +168,17 @@ export const onShowSuccess = (recipe) => {
     div.appendChild(stepsHeader)
     div.appendChild(stepsOl)
 
-    const editButton = document.createElement('button')
-    editButton.innerText = 'Edit'
-    editButton.classList.add('edit-recipe')
-    editButton.setAttribute('data-id', recipe._id)
-    showContainer.appendChild(editButton)
+    if(recipe.user._id === window.localStorage.user) {
+        const editButton = document.createElement('button')
+        editButton.innerText = 'Edit'
+        editButton.classList.add('edit-recipe')
+        editButton.setAttribute('data-id', recipe._id)
+        showContainer.appendChild(editButton)
+    }
 }
 
 export const createEditForm = (id) => {
+    updateRecipeForm.classList.remove('hidden')
     // grab all of the info from the show page so it can be used to auto populate the update form
     const name = document.querySelector('.show-container h2')
     const description = document.querySelector('.description')
@@ -192,7 +235,8 @@ export const createEditForm = (id) => {
     showContainer.classList.add('hidden')
 }
 
-export const craeteAddRecipeForm = () => {
+export const createAddRecipeForm = () => {
+    addNewRecipeForm.classList.remove('hidden')
     addNewRecipeForm.innerHTML = 
     `
     <label>Name:</label>
@@ -259,6 +303,8 @@ export const createNewStepRow = (formBaseName) => {
 
 export const clearContent = () => {
     messageContainerBox.classList.add('hidden')
+    addNewRecipeForm.classList.add('hidden')
+    updateRecipeForm.classList.add('hidden')
     messageContainer.innerHTML = ''
     indexContainer.innerHTML = ''
     showContainer.innerHTML = ''

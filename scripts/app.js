@@ -6,6 +6,7 @@ import {
     showRecipe,
     updateRecipe,
     deleteRecipe,
+    indexAllRecipes
 } from './api.js'
 
 import {
@@ -14,13 +15,14 @@ import {
     onCreateAccountSuccess,
     onShowSuccess,
     createEditForm,
-    craeteAddRecipeForm,
+    createAddRecipeForm,
     onFailure,
     userInputError,
     createNewIngredientRow,
     createNewStepRow,
     clearContent,
-    createDeleteConfirmationPrompt
+    createDeleteConfirmationPrompt,
+    onIndexAllSuccess
 } from './ui.js'
 
 const signUpButton = document.querySelector('#sign-up')
@@ -37,6 +39,7 @@ const closeMessageContainerSpan = document.querySelector('.close-message-contain
 const messageContainerBox = document.querySelector('.message-container-box')
 const userNameInput = document.querySelector('#userName')
 const passwordInput = document.querySelector('#password')
+const viewAllRecipes = document.querySelector('.view-all-recipes')
 
 signUpButton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -115,9 +118,10 @@ const createIndexEventListeners = () => {
 }
 
 const createEditButtonEventListener = (id) => {
-    const editButton = document.querySelector('.edit-recipe')
-    editButton.setAttribute('data-id', id)
-    editButton.addEventListener('click', () => {
+    try {
+        const editButton = document.querySelector('.edit-recipe')
+        editButton.setAttribute('data-id', id)
+        editButton.addEventListener('click', () => {
         // create the edit form once the user has clicked the edit button on the show page
         // and create the event listeners for all of the buttons in the form
         createEditForm(editButton.getAttribute('data-id'))
@@ -128,6 +132,9 @@ const createEditButtonEventListener = (id) => {
         createUpdateFormEventListener()
         createDeleteFormEventListener()
     })
+    } catch {
+        return
+    }
 }
 
 const createDeleteIngredientEventListener = (formBaseName) => {
@@ -301,7 +308,7 @@ const isRecipeObjectValid = (recipe) => {
 
 addNewRecipe.addEventListener('click', () => {
     clearContent()
-    craeteAddRecipeForm()
+    createAddRecipeForm()
     createDeleteIngredientEventListener('add-recipe')
     createDeleteStepEventListener('add-recipe')
     createAddIngredientEventListener('add-recipe')
@@ -347,4 +354,15 @@ const checkResponseStatusCode = (res) => {
 closeMessageContainerSpan.addEventListener('click', () => {
     messageContainerBox.classList.add('hidden')
     messageContainer.innerHTML = ''
+})
+
+viewAllRecipes.addEventListener('click', () => {
+    clearContent()
+    indexAllRecipes()
+        .then(checkResponseStatusCode)
+        .then(res => res.json())
+        .then(responseObject => onIndexAllSuccess(responseObject.recipes))
+        .then(() => createIndexEventListeners())
+        .catch(onFailure)
+
 })

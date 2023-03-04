@@ -1,4 +1,5 @@
 const baseUrl = 'https://glacial-plains-23237.herokuapp.com'
+// const baseUrl = 'http://localhost:3000'
 
 export const signUp = (data) => {
     return fetch(`${baseUrl}/sign-up`, {
@@ -48,6 +49,14 @@ export const indexRecipes = (token = null) => {
             }
         })
     }
+}
+
+export const indexAllRecipes = () => {
+    return fetch(`${baseUrl}/allRecipes`, {
+        headers: {
+            'Authorization': `Bearer ${window.localStorage.token}`
+        }
+    })
 }
 
 export const showRecipe = (recipeId) => {
