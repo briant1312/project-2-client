@@ -211,12 +211,9 @@ export const createEditForm = (id) => {
         const div = document.createElement('div')
         div.innerHTML = 
         `
-        <label>qty</label>
-        <input type="text" value="${ingredient.childNodes[0].innerText}">
-        <label>unit</label>
-        <input type="text" value="${ingredient.childNodes[2].innerText}">
-        <label>name</label>
-        <input type="text" value="${ingredient.childNodes[4].innerText}">
+        <input placeholder="qty" type="text" value="${ingredient.childNodes[0].innerText}">
+        <input placeholder="unit" type="text" value="${ingredient.childNodes[2].innerText}">
+        <input placeholder="name" type="text" value="${ingredient.childNodes[4].innerText}">
         <button class="update-form-delete-ingredient">&times;</button>
         `
         document.querySelector('.update-form-ingredients').appendChild(div)
@@ -257,12 +254,9 @@ export const createAddRecipeForm = () => {
     const ingredientDiv = document.createElement('div')
     ingredientDiv.innerHTML = 
         `
-        <label>qty</label>
-        <input type="text">
-        <label>unit</label>
-        <input type="text">
-        <label>name</label>
-        <input type="text">
+        <input placeholder="qty" type="text">
+        <input placeholder="unit" type="text">
+        <input placeholder="name" type="text">
         <button class="add-recipe-form-delete-ingredient">&times;</button>
         `
     document.querySelector('.add-recipe-form-ingredients').appendChild(ingredientDiv)
@@ -280,12 +274,9 @@ export const createNewIngredientRow = (formBaseName) => {
     const div = document.createElement('div')
     div.innerHTML = 
         `
-        <label>qty</label>
-        <input type="text" id="${formBaseName}-form-qty">
-        <label>unit</label>
-        <input type="text" id="${formBaseName}-form-unit">
-        <label>name</label>
-        <input type="text" id="${formBaseName}-form-name">
+        <input placeholder="qty" type="text" id="${formBaseName}-form-qty">
+        <input placeholder="unit" type="text" id="${formBaseName}-form-unit">
+        <input placeholder="name" type="text" id="${formBaseName}-form-name">
         <button class="${formBaseName}-form-delete-ingredient">&times;</button>
         `
         document.querySelector(`.${formBaseName}-form-ingredients`).appendChild(div)
