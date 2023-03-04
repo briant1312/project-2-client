@@ -323,7 +323,7 @@ p.appear {
 
 #add-recipe,
 #update-recipe {
-    width: 85%;
+    width: 95%;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -392,7 +392,7 @@ p.appear {
 
 #add-recipe .add-recipe-form-ingredients input,
 #update-recipe .update-form-ingredients input {
-    width: 5rem;
+    width: 7.5rem;
     font-size: var(--font-size-small);
     line-height: 1;
 }
@@ -416,7 +416,7 @@ p.appear {
 
 .add-recipe-form-steps button,
 .update-form-steps button {
-    margin-left: 3rem;
+    margin-left: 1rem;
     font-size: var(--font-size-md);
     position: absolute;
 
@@ -431,7 +431,7 @@ p.appear {
 
 .add-recipe-form-steps textarea,
 .update-form-steps textarea {
-    width: 80%;
+    width: 85%;
     height: 8rem;
     padding: .5rem;
     font-size: var(--font-size-small);
@@ -456,7 +456,7 @@ p.appear {
 }
 
 .delete-recipe-submit {
-    margin-left: 50vw;
+    margin-left: 40vw;
     background-color: orangered;
     color: white;
 }
@@ -480,14 +480,23 @@ p.appear {
         padding-left: 2rem;
     }
 
+    #add-recipe,
+    #update-recipe {
+        width: 85%;
+    }
+
     #add-recipe .add-recipe-form-ingredients input,
     #update-recipe .update-form-ingredients input {
-        width: 10rem;
+        width: 12rem;
     }
 
     .show-container {
         width: 80%;
         margin: 0 auto;
+    }
+
+    .delete-recipe-submit {
+        margin-left: 50vw;
     }
 
 }
